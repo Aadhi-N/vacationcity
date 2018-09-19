@@ -22,12 +22,12 @@ export class FilterComponent implements OnInit {
 
   
 
-  onSubmit(val:any) {
+  onSubmit() {
     console.log(this.season, 'value of select')
   }
 
-  filterById(): void {
+  // filterById(): void {
 
-  }
+  // }
 
 }
