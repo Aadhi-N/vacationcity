@@ -1,0 +1,7 @@
+<select [(ngModel)]="monthSelected" (ngModelChange)="onMonthSelected($event)">
+    <option *ngFor="let month of months" [value]="month.name">{{month.name}}</option>
+</select>
+
+
+<p>{{message}}</p>
+<p>{{season}}</p>

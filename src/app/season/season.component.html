@@ -1,0 +1,6 @@
+<select [(ngModel)]="seasonSelected" (ngModelChange)="onSeasonSelected($event)">
+    <option *ngFor="let season of seasons" [value]="season.name">{{season.name}}</option>
+</select> temperatures.
+
+<p>{{message}}</p>
+<p>{{season}}</p>
