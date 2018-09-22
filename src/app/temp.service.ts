@@ -3,8 +3,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { catchError, map, tap } from "rxjs/operators";
 
 import { MessageService } from "./message.service";
-import { Observable, of, forkJoin } from "rxjs";
-
+import { Observable, of } from "rxjs";
 import { Temp } from "./temp";
 
 @Injectable({
@@ -13,20 +12,22 @@ import { Temp } from "./temp";
 export class TempService {
   private tempsUrl = "api/temps";
 
-  constructor( private http: HttpClient,
-    private messageService: MessageService) { }
+  constructor(
+    private http: HttpClient,
+    private messageService: MessageService
+  ) { }
 
   private log(message: string) {
-    this.messageService.add(`TempService: ${message}`);
+    this.messageService.add(`HumidityService: ${message}`);
   }
 
-  getTemps(): Observable<Temp[]>{
-    return this.http.get(this.tempsUrl)
+  getTemps(): Observable<Temp[]> {
+    return this.http.get<Temp[]>(this.tempsUrl)
       .pipe(
-          tap(temps => this.log("fetched temps")),
-          catchError(this.handleError("getTemps", []))
-      );
-  }
+        tap(temps=> this.log("fetched temps")),
+        catchError(this.handleError("getTemps", []))
+      )
+  };
 
   private handleError<T>(operation = "operation", result?: T) {
     return (error: any): Observable<T> => {
@@ -39,6 +40,5 @@ export class TempService {
       // Let the app keep running by returning an empty result.
       return of(result as T);
     };
-  }
-
+  };
 }

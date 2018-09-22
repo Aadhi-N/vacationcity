@@ -16,15 +16,29 @@ export class InMemoryDataService implements InMemoryDbService {
       { id: 11, name: "November" },
       { id: 11, name: "December" }
     ];
-    const seasons = [
-      { id: 1, name: "Winter" },
-      { id: 2, name: "Spring" },
-      { id: 3, name: "Summer" },
-      { id: 4, name: "Fall" }
+    const temps = [
+      {
+        id: 1,
+        range: {
+          low: -50,
+          high: 50
+        }
+      }
+    ];
+
+    const humidity = [
+      {
+        id: 1,
+        range: {
+          low: 0,
+          high: 100
+        }
+      }
     ];
 
     const cities = [
-      {id: 1,
+      {
+        id: 1,
         name: "Toronto"
       },
       {
@@ -32,221 +46,303 @@ export class InMemoryDataService implements InMemoryDbService {
         name: "Tokyo"
       },
       {
-        id: 4,
+        id: 3,
         name: "Los Angeles"
       },
       {
-        id: 5,
+        id: 4,
         name: "Alyeska"
       }
     ];
 
-    const temps = [
+    const cityTemps = [
       {
-        id: 1,
+        cityId: 1,
         month: 1,
-        avgCelcius: -10
+        avgCelcius: -10,
+        avgHumidity: 80
       },
       {
-        id: 1,
+        cityId: 1,
         month: 2,
-        avgCelcius: -18
+        avgCelcius: -18,
+        avgHumidity: 80
       },
       {
-        id: 1,
+        cityId: 1,
         month: 3,
-        avgCelcius: -8
+        avgCelcius: -8,
+        avgHumidity: 81
       },
       {
-        id: 1,
+        cityId: 1,
         month: 4,
-        avgCelcius: -3
+        avgCelcius: -3,
+        avgHumidity: 79
       },
       {
-        id: 1,
+        cityId: 1,
         month: 5,
-        avgCelcius: 5
+        avgCelcius: 5,
+        avgHumidity: 80
       },
       {
-        id: 1,
+        cityId: 1,
         month: 6,
-        avgCelcius: 10
+        avgCelcius: 10,
+        avgHumidity: 85
       },
       {
-        id: 1,
+        cityId: 1,
         month: 7,
-        avgCelcius: 20
+        avgCelcius: 20,
+        avgHumidity: 90
       },
       {
-        id: 1,
+        cityId: 1,
         month: 8,
-        avgCelcius: 25
+        avgCelcius: 25,
+        avgHumidity: 95
       },
       {
-        id: 1,
+        cityId: 1,
         month: 9,
-        avgCelcius: 7
+        avgCelcius: 7,
+        avgHumidity: 83
       },
       {
-        id: 1,
+        cityId: 1,
         month: 10,
-        avgCelcius: 4
+        avgCelcius: 4,
+        avgHumidity: 80
       },
       {
-        id: 1,
+        cityId: 1,
         month: 11,
-        avgCelcius: -3
+        avgCelcius: -3,
+        avgHumidity: 79
       },
       {
-        id: 1,
+        cityId: 1,
         month: 12,
-        avgCelcius: -12
+        avgCelcius: -12,
+        avgHumidity: 82
       },
-      { id: 2,
+      {
+        cityId: 2,
         month: 1,
-        avgCelcius: -3
+        avgCelcius: -3,
+        avgHumidity: 45
       },
-      { id: 2,
+      {
+        cityId: 2,
         month: 2,
-        avgCelcius: 5
+        avgCelcius: 5,
+        avgHumidity: 47
       },
-      { id: 2,
+      {
+        cityId: 2,
         month: 3,
-        avgCelcius: 10
+        avgCelcius: 10,
+        avgHumidity: 50
       },
-      { id: 2,
+      {
+        cityId: 2,
         month: 4,
-        avgCelcius: 12
+        avgCelcius: 12,
+        avgHumidity: 52
       },
-      { id: 2,
+      {
+        cityId: 2,
         month: 5,
-        avgCelcius: 15
+        avgCelcius: 15,
+        avgHumidity: 60
       },
-      { id: 2,
+      {
+        cityId: 2,
         month: 6,
-        avgCelcius: 20
+        avgCelcius: 20,
+        avgHumidity: 76
       },
-      { id: 2,
+      {
+        cityId: 2,
         month: 7,
-        avgCelcius: 26
+        avgCelcius: 26,
+        avgHumidity: 79
       },
-      { id: 2,
+      {
+        cityId: 2,
         month: 8,
-        avgCelcius: 28
+        avgCelcius: 28,
+        avgHumidity: 65
       },
-      { id: 2,
+      {
+        cityId: 2,
         month: 9,
-        avgCelcius: 10
+        avgCelcius: 10,
+        avgHumidity: 61
       },
-      { id: 2,
+      {
+        cityId: 2,
         month: 10,
-        avgCelcius: 7
-      },
-      { id: 2,
+        avgCelcius: 7,
+avgHumidity: 55       },
+      {
+        cityId: 2,
         month: 11,
-        avgCelcius: -2
+        avgCelcius: -2,
+        avgHumidity: 52
       },
-      { id: 2,
+      {
+        cityId: 2,
         month: 12,
-        avgCelcius: -5
+        avgCelcius: -5,
+        avgHumidity: 50
       },
-      { id: 3,
+      {
+        cityId: 3,
         month: 1,
-        avgCelcius: 15
+        avgCelcius: 15,
+        avgHumidity:  5     
       },
-      { id: 3,
+      {
+        cityId: 3,
         month: 2,
-        avgCelcius: 18
+        avgCelcius: 18,
+        avgHumidity:  6     
       },
-      { id: 3,
+      {
+        cityId: 3,
         month: 3,
-        avgCelcius: 19
+        avgCelcius: 19,
+        avgHumidity:  6     
       },
-      { id: 3,
+      {
+        cityId: 3,
         month: 4,
-        avgCelcius: 20
+        avgCelcius: 20,
+        avgHumidity:  10     
       },
-      { id: 3,
+      {
+        cityId: 3,
         month: 5,
-        avgCelcius: 25
+        avgCelcius: 25,
+        avgHumidity: 25      
       },
-      { id: 3,
+      {
+        cityId: 3,
         month: 6,
-        avgCelcius: 25
+        avgCelcius: 25,
+        avgHumidity:  70     
       },
-      { id: 3,
+      {
+        cityId: 3,
         month: 7,
-        avgCelcius: 30
+        avgCelcius: 30,
+        avgHumidity:   75    
       },
-      { id: 3,
+      {
+        cityId: 3,
         month: 8,
-        avgCelcius: 34
+        avgCelcius: 34,
+        avgHumidity:   90    
       },
-      { id: 3,
+      {
+        cityId: 3,
         month: 9,
-        avgCelcius: 25
+        avgCelcius: 25,
+        avgHumidity:  90     
       },
-      { id: 3,
+      {
+        cityId: 3,
         month: 10,
-        avgCelcius: 19
+        avgCelcius: 19,
+        avgHumidity:   70    
       },
-      { id: 3,
+      {
+        cityId: 3,
         month: 11,
-        avgCelcius: 17
-      },
-      { id: 3,
+        avgCelcius: 17,
+        avgHumidity: 72      },
+      {
+        cityId: 3,
         month: 12,
-        avgCelcius: 17
-      },
-      { id: 4,
+        avgCelcius: 17,
+        avgHumidity:  10     },
+      {
+        cityId: 4,
         month: 1,
-        avgCelcius: -30
-      },
-      { id: 4,
+        avgCelcius: -30,
+        avgHumidity: 70
+   
+   },
+      {
+        cityId: 4,
         month: 2,
-        avgCelcius: -32
+        avgCelcius: -32,
+        avgHumidity: 65
       },
-      { id: 4,
+      {
+        cityId: 4,
         month: 3,
-        avgCelcius: -20
+        avgCelcius: -20,
+        avgHumidity: 50
       },
-      { id: 4,
+      {
+        cityId: 4,
         month: 4,
-        avgCelcius: -18
+        avgCelcius: -18,
+        avgHumidity: 53
       },
-      { id: 4,
+      {
+        cityId: 4,
         month: 5,
-        avgCelcius: -10
+        avgCelcius: -10,
+        avgHumidity: 50
       },
-      { id: 4,
+      {
+        cityId: 4,
         month: 6,
-        avgCelcius: -10
+        avgCelcius: -10,
+        avgHumidity: 54
       },
-      { id: 4,
+      {
+        cityId: 4,
         month: 7,
-        avgCelcius: -5
+        avgCelcius: -5,
+        avgHumidity: 50      
       },
-      { id: 4,
+      {
+        cityId: 4,
         month: 8,
-        avgCelcius: -4
+        avgCelcius: -4,
+        avgHumidity: 60      
       },
-      { id: 4,
+      {
+        cityId: 4,
         month: 9,
-        avgCelcius: -8
+        avgCelcius: -8,
+        avgHumidity: 68      
       },
-      { id: 4,
+      {
+        cityId: 4,
         month: 10,
-        avgCelcius: -15
+        avgCelcius: -15,
+        avgHumidity: 72
       },
-      { id: 4,
+      {
+        cityId: 4,
         month: 11,
-        avgCelcius: -23
+        avgCelcius: -23,
+        avgHumidity: 75
       },
-      { id: 4,
+      {
+        cityId: 4,
         month: 12,
-        avgCelcius: -28
+        avgCelcius: -28,
+        avgHumidity: 79
       }
     ];
-    return { months, seasons, cities, temps };
+    return { months, temps, humidity, cities, cityTemps };
   }
 }

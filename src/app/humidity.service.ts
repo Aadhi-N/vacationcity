@@ -4,29 +4,29 @@ import { catchError, map, tap } from "rxjs/operators";
 
 import { MessageService } from "./message.service";
 import { Observable, of } from "rxjs";
-import { Season } from "./season";
+import { Humidity } from "./humidity";
 
 @Injectable({
   providedIn: 'root'
 })
-export class SeasonService {
-  private seasonsUrl = "api/seasons";
+export class HumidityService {
+  private humidityUrl = "api/humidity";
 
   constructor(
     private http: HttpClient,
-    private messageService: MessageService
-  ) { }
+    private messageService: MessageService) { }
 
   private log(message: string) {
-    this.messageService.add(`SeasonService: ${message}`);
+    this.messageService.add(`HumidityService: ${message}`);
   }
 
-  getSeasons(): Observable<Season[]> {
-    return this.http.get<Season[]>(this.seasonsUrl)
-    .pipe(
-        tap(seasons => this.log("fetched seasons")),
-        catchError(this.handleError("getSeasons", []))
-    );
+  getHumidity(): Observable<Humidity[]> {
+    return this.http
+      .get<Humidity[]>(this.humidityUrl)
+      .pipe(
+        tap(humidity => this.log("fetched humidity")),
+        catchError(this.handleError("getHumidity", []))
+      );
   }
 
   private handleError<T>(operation = "operation", result?: T) {

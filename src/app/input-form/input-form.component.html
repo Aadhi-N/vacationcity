@@ -1,0 +1,38 @@
+
+  I want to travel in 
+
+  <!-- SEMANTIC UI DROPDOWN -->
+  <div class="ui dropdown">
+    <input type="hidden" name="month">
+    <i class="dropdown icon"></i> 
+    <div class="default text">Month</div>
+    <div class="menu" (click)="monthSelected()">
+      <div class="item" *ngFor="let month of months" value="month.name" >{{month.name}}</div>
+    </div>
+  </div>
+
+<!-- 
+  <select [(ngModel)]="monthSelected" (ngModelChange)="onMonthSelected($event)">
+    <option *ngFor="let month of months" [value]="month.name">{{month.name}}</option>
+  </select>
+  .
+ -->
+
+<p> The temperature should be around </p>
+  <p>Value: <input type="text" id="value" class="slider"></p>
+  
+  <input *ngFor="let temp of temps" type="range" class="slider" id="range" [min]=temp.range.low [max]="temp.range.high" [value]="0" (click)="tempSlider()">
+  
+
+
+
+<p> The humidity should be around </p>
+<p>Value: <input type="text" id="humidityVal" class="slider"></p>
+
+<input *ngFor="let humidity of humidity" type="range" class="slider" id="humidityRange" [min]=humidity.range.low [max]="humidity.range.high" [value]="0" (click)="humiditySlider()">
+
+<div>
+<button (click)="onSubmit()">Submit</button>
+</div>
+
+

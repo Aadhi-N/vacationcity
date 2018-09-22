@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { SeasonService } from './season.service';
+import { HumidityService } from './humidity.service';
 
-describe('SeasonService', () => {
+describe('HumidityService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: SeasonService = TestBed.get(SeasonService);
+    const service: HumidityService = TestBed.get(HumidityService);
     expect(service).toBeTruthy();
   });
 });

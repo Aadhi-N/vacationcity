@@ -10,23 +10,15 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
 import { BannerComponent } from './banner/banner.component';
-import { FilterComponent } from './filter/filter.component';
-import { FilterResultsComponent } from './filter-results/filter-results.component';
-import { SeasonComponent } from './season/season.component';
-import { MonthComponent } from './month/month.component';
 import { MessagesComponent } from './messages/messages.component';
-import { CityComponent } from './city/city.component';
+import { InputFormComponent } from './input-form/input-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     BannerComponent,
-    FilterComponent,
-    FilterResultsComponent,
-    SeasonComponent,
-    MonthComponent,
     MessagesComponent,
-    CityComponent
+    InputFormComponent
   ],
   imports: [
     BrowserModule,

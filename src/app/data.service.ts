@@ -4,13 +4,13 @@ import { BehaviorSubject } from "rxjs";
 @Injectable()
 export class DataService {
 
-  private messageSource = new BehaviorSubject<string>("");
+  private monthSource = new BehaviorSubject<string>("");
 
   private seasonSource = new BehaviorSubject<string>("");
 
   //current message variable used by components
 
-  currentMessage = this.messageSource.asObservable();
+  monthMessage = this.monthSource.asObservable();
 
   seasonMessage = this.seasonSource.asObservable();
 
@@ -18,8 +18,8 @@ export class DataService {
 
   //changes currentMessage's current value
 
-  changeMessage(message: string) {
-    this.messageSource.next(message);
+  changeMessage(month: string) {
+    this.monthSource.next(month);
   }
 
   changeSeason(season: string) {
