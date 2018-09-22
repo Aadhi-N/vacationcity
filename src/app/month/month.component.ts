@@ -22,6 +22,8 @@ export class MonthComponent implements OnInit {
   ngOnInit() {
     this.getMonths();
     this.monthSelected = "September"
+
+    //communicating and displaying value of month/season selected across components
     this.data.currentMessage.subscribe(message => this.message = message);
 
     this.data.seasonMessage.subscribe(season => this.season = season);
@@ -29,7 +31,8 @@ export class MonthComponent implements OnInit {
 
   //DISPLAYS LIST OF MONTHS FROM DATA SOURCE
    getMonths(): void {
-    this.months = this.monthService.getMonths();
+    this.monthService.getMonths()
+      .subscribe(months => this.months = months);
   }
 
   onMonthSelected(val:any) {

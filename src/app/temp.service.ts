@@ -1,32 +1,30 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { catchError, map, tap } from "rxjs/operators";
 
 import { MessageService } from "./message.service";
-import { Observable, of } from "rxjs";
-import { Month } from "./month";
+import { Observable, of, forkJoin } from "rxjs";
+
+import { Temp } from "./temp";
 
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root'
 })
-export class MonthService {
-  private monthsUrl = "api/months";
+export class TempService {
+  private tempsUrl = "api/temps";
 
-  constructor(
-    private http: HttpClient,
-    private messageService: MessageService
-  ) {}
+  constructor( private http: HttpClient,
+    private messageService: MessageService) { }
 
   private log(message: string) {
-    this.messageService.add(`MonthService: ${message}`);
+    this.messageService.add(`TempService: ${message}`);
   }
 
-  getMonths(): Observable<Month[]> {
-    return this.http
-      .get<Month[]>(this.monthsUrl)
+  getTemps(): Observable<Temp[]>{
+    return this.http.get(this.tempsUrl)
       .pipe(
-        tap(months => this.log("fetched months")),
-        catchError(this.handleError("getMonths", []))
+          tap(temps => this.log("fetched temps")),
+          catchError(this.handleError("getTemps", []))
       );
   }
 
@@ -42,4 +40,5 @@ export class MonthService {
       return of(result as T);
     };
   }
+
 }

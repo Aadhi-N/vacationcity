@@ -1,6 +1,6 @@
-import { Temps } from "./temps";
+import { Temp } from "./temp";
 
-export const TEMPS: Temps[] = [
+export const TEMPS: Temp[] = [
   {
     id: 1,
     month: 1,

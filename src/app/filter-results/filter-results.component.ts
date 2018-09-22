@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { DataService } from "../data.service";
 import { CITIES } from "../mock-cities";
 import { TEMPS } from "../mock-temps";
-import { MONTHS } from "../mock-months";
 
 @Component({
   selector: 'app-filter-results',
@@ -12,7 +11,7 @@ import { MONTHS } from "../mock-months";
 export class FilterResultsComponent implements OnInit {
   cities = CITIES;
   temps = TEMPS;
-  months = MONTHS;
+  // months = MONTHS;
 
   message: string;
   season: string;

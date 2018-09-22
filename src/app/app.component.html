@@ -2,8 +2,13 @@
   <h1>
     {{ title }}
   </h1>
-<app-banner></app-banner>
+  <nav>
+    <a routerLink="/banner">Filter your selection</a> 
+  </nav>
+<router-outlet></router-outlet>
 <app-filter></app-filter>
 <app-filter-results></app-filter-results>
+<app-city></app-city>
+<app-messages></app-messages>
 </div>
 

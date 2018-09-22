@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Season } from "../season";
-import { SeasonService } from "../season.service";
 import { DataService } from "../data.service";
 
+import { Season } from "../season";
+import { SeasonService } from "../season.service";
 
 @Component({
   selector: 'app-season',
@@ -20,14 +20,13 @@ export class SeasonComponent implements OnInit {
   ngOnInit() {
     this.getSeasons();
     this.seasonSelected = "Winter";
-    this.data.currentMessage.subscribe(message => this.message = message);
-
     this.data.seasonMessage.subscribe(season => this.season = season)
   }
 
   //DISPLAYS LIST OF SEASONS FROM DATA SOURCE
    getSeasons(): void {
-    this.seasons = this.seasonService.getSeasons();
+    this.seasonService.getSeasons()
+    .subscribe(seasons => this.seasons = seasons);
   }
 
   onSeasonSelected(val:any) {
