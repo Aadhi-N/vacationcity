@@ -3,7 +3,7 @@
 
   <!-- SEMANTIC UI DROPDOWN -->
 <select name="Month" class="ui dropdown" id="select" (click)="onMonthClick($event)" >
-  <option *ngFor="let month of months" [value]="month.name">{{month.name}}</option>
+  <option *ngFor="let month of months" [value]="month.id">{{month.name}}</option>
 </select>
 
 <br />
@@ -20,20 +20,7 @@
 </label>
 
 
-<!-- <p> The humidity should be around </p>
-<p>Value: <input type="text" id="humidityVal" class="slider"></p>
 
-<input *ngFor="let humidity of humidity" type="range" class="slider" id="humidityRange" [min]=humidity.range.low [max]="humidity.range.high" [value]="0" (mousedown)="humiditySlider()">
+<button class="ui button" (click)="showData()">Submit</button>
+<!-- <p *ngFor="let data of submitData">Data:{{data.dmonth}} </p> -->
 
-<div>
-<button (click)="onSelect($event)">Submit</button>
-</div>
-
-<label>Amount:
-  <input type="range" id="inputnumber" min="0" max="100" step="1" [value]="50" [(ngModel)]="mymodel" (ngModelChange)="showAmount($event)">
-  <span id="amount">{{mymodel}}</span>
-</label>
-
-
-
- -->

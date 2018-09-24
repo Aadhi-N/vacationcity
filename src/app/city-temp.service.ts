@@ -1,33 +1,32 @@
 import { Injectable } from '@angular/core';
+
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { catchError, map, tap } from "rxjs/operators";
 
 import { MessageService } from "./message.service";
 import { Observable, of } from "rxjs";
-import { forkJoin } from "rxjs";
-import { City } from "./city";
-
+import { CityTemp } from "./cityTemp";
 
 @Injectable({
   providedIn: 'root'
 })
-export class CityService {
-  private citiesUrl = "api/cities";
- 
-  constructor(
-    private http: HttpClient,
+export class CityTempService {
+  private cityTempsUrl = "api/cityTemps";
+
+  constructor(private http: HttpClient,
     private messageService: MessageService
-  ) { }
+    ) { }
 
   private log(message: string) {
-    this.messageService.add(`CityService: ${message}`);
+    this.messageService.add(`CityTempService: ${message}`);
   }
 
-  getCities(): Observable<City[]>{
-      return this.http.get<City[]>(this.citiesUrl)
-        .pipe(
-          tap(cities => this.log("fetched humidity")),
-          catchError(this.handleError("getCities", []))
+  getCityTemps(): Observable<CityTemp[]> {
+    return this.http
+      .get<CityTemp[]>(this.cityTempsUrl)
+      .pipe(
+        tap(cityTemps => this.log("fetched city temps")),
+        catchError(this.handleError("getCityTemps", []))
       );
   }
 
