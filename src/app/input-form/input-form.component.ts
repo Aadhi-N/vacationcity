@@ -23,7 +23,9 @@ import { HumidityService } from "../humidity.service";
 })
 export class InputFormComponent implements OnInit {
   months: Month[];
-  monthSelected: string;
+  selectedMonth: string;
+  selectedTemp: number;
+  selectedHumidity: number;
 
   cities: City[];
   cityTemps: CityTemp[];
@@ -31,8 +33,6 @@ export class InputFormComponent implements OnInit {
   temps: Temp[];
 
   humidity: Humidity[];
-
-  month: string;
 
 
   constructor(private monthService: MonthService, private cityService: CityService, private tempService: TempService, private humidityService: HumidityService) { }
@@ -42,15 +42,12 @@ export class InputFormComponent implements OnInit {
     this.getCities();
     this.getTemps();
     this.getHumidity();
-    this.showDropdown();
+    // this.showDropdown();
   }
 
   ngAfterViewInit() {
-    this.showDropdown();
-    this.tempSlider();
-    this.humiditySlider();
-    this.onSubmit();
-    this.monthSelected();
+    this.tempSlider(event);
+    this.humiditySlider(event);
   }
 
   //DISPLAYS LIST OF MONTHS FROM DATA SOURCE
@@ -59,18 +56,17 @@ export class InputFormComponent implements OnInit {
       .subscribe(months => this.months = months);
   }
 
-  monthSelected(val:any) {
-    console.log('month selected', val)
-    this.month = val;
-    //web api or any other logic
-    // this.sendSelectedMonth(this.month);
-  }
+  // onMonthSelected(val:any) {
+  //   console.log('month selected', val)
+  //   this.month = val;
+  //   //web api or any other logic
+  //   // this.sendSelectedMonth(this.month);
+  // }
 
   getCities(): void {
     this.cityService.getCities()
       .subscribe(cities => {
         this.cities = cities
-        // console.log('cities list', this.cities)
       })
   }
 
@@ -81,51 +77,26 @@ export class InputFormComponent implements OnInit {
 
   getHumidity(): void {
     this.humidityService.getHumidity()
-      .subscribe(humidity => {this.humidity = humidity
-        // console.log('humidity list', this.humidity)
+      .subscribe(humidity => {this.humidity = humidity; console.log('what is humidity', humidity)
       })
   }
 
-  showDropdown(): void {
-    $('.ui.dropdown')
-      .dropdown()
-    ;
+  // showDropdown(): void {
+  //   $('.ui.dropdown')
+  //     .dropdown()
+  //   ;
+  // }
+
+  onMonthClick(event): void {
+    this.selectedMonth = event.target.value;
   }
 
-  tempSlider(): void {
-    let range = $('#range').val();
-    let value = $('#value').val(range);
-    $('#range').change(function(){
-      let range2 = $('#value').val()
-      $('#value').val(range2)
-    })
-    $('#value').keyup(function(){
-      var value2 = $('#value').val()
-      $("#range").val(value2)
-    })
-
-    console.log('tempSlider', range)
-    this.onSubmit(range, null)
+  tempSlider(event): void {
+    this.selectedTemp = event;
   }
 
-  humiditySlider(): void {
-    let humidityRange = $('#humidityRange').val();
-    let humidityVal = $('#humidityVal').val(humidityRange);
-    $('#humidityRange').change(function(){
-      let humidityRange2 = $('#humidityVal').val()
-      $('#humidityVal').val(humidityRange2)
-    })
-    $('#humidityVal').keyup(function(){
-      var humidityVal2 = $('#humidityVal').val()
-      $("#humidityRange").val(humidityVal2)
-    })
-
-    console.log('humidityRangeSlider', humidityRange)
-    this.onSubmit(null, humidityRange)
-  }
-
-  onSubmit(range, humidityRange): void {
-    console.log('onSubmit', range, humidityRange)
+  humiditySlider(event): void {
+    this.selectedHumidity = event;
   }
 
 }

@@ -18,7 +18,7 @@ export class TempService {
   ) { }
 
   private log(message: string) {
-    this.messageService.add(`HumidityService: ${message}`);
+    this.messageService.add(`TempService: ${message}`);
   }
 
   getTemps(): Observable<Temp[]> {
