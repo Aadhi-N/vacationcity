@@ -138,7 +138,7 @@ export class InputFormComponent implements OnInit {
     let i = 0;
     for (i; i < filteredHumidity.length; i++) {
       loopedArray.push(filteredHumidity[i].cityId)
-      
+
     }
 
     console.log('loopedArray', loopedArray)
@@ -146,6 +146,7 @@ export class InputFormComponent implements OnInit {
     let applicableCities = this.cities.filter(city => {
       if (loopedArray.includes(city.id)) {
         return city.name;
+        // return avgCelcius, avgHumidity
       }
     })
 
