@@ -30,12 +30,12 @@ export class InputFormComponent implements OnInit {
   temps: Temp[];
   humidity: Humidity[];
 
-  selectedMonth: string;
+  selectedMonth: number;
   selectedTemp: number;
   selectedHumidity: number;
   submitData: any[];
 
-  filteredMonth: any;
+  filteredMonth: any[];
 
 
   constructor(private monthService: MonthService, private cityService: CityService, private cityTempService: CityTempService, private tempService: TempService, private humidityService: HumidityService) { }
@@ -47,7 +47,8 @@ export class InputFormComponent implements OnInit {
     this.getTemps();
     this.getHumidity();
     // this.showDropdown();
-    this.filteredMonth=[];
+    this.onMonthClick(event);
+    // this.filteredMonth=[];
   }
 
   ngAfterViewInit() {
@@ -96,7 +97,11 @@ export class InputFormComponent implements OnInit {
   // }
 
   onMonthClick(event): void {
-    this.selectedMonth = event.target.value;
+    if (this.selectedMonth == undefined) {
+      // this.selectedMonth = 1;
+    }
+    this.selectedMonth = Number(event.target.value);
+    // console.log('onMonthClick', typeof this.selectedMonth)
   }
 
   tempSlider(event): void {
@@ -108,20 +113,51 @@ export class InputFormComponent implements OnInit {
   }
 
   showData() {
-    let cTemp;
-
-    this.cityTemps.filter(cityTemp => {
-      if cityTemp.monthId == this.selectedMonth {
-        cTemp = cityTemp;
+    let temperaturesForSelectedMonth = this.cityTemps.filter(cityTemp => {
+      if (cityTemp.monthId === this.selectedMonth) {
+        return cityTemp;
       }
-        this.filteredMonth.push(cTemp)
     })
-        this.showResult(this.filteredMonth);
-    
-  }
 
-  showResult(gc) {
-    console.log(gc, "filteredMonth")
+    let filteredTemperatures = temperaturesForSelectedMonth.filter(temp => {
+      // console.log('temp', temp)
+      if (((this.selectedTemp - 10) < temp.avgCelcius) && (temp.avgCelcius < (this.selectedTemp + 10))) {
+        return temp;
+      }
+    })
+
+    let filteredHumidity = filteredTemperatures.filter(humidity => {
+      if (((this.selectedHumidity - 10) < humidity.avgHumidity) && (humidity.avgHumidity < (this.selectedHumidity + 10))) {
+        return humidity;
+      }
+    })
+
+    // take array of objects, convert into array of integers 
+
+    let loopedArray = [];
+    let i = 0;
+    for (i; i < filteredHumidity.length; i++) {
+      loopedArray.push(filteredHumidity[i].cityId)
+      
+    }
+
+    console.log('loopedArray', loopedArray)
+
+    let applicableCities = this.cities.filter(city => {
+      if (loopedArray.includes(city.id)) {
+        return city.name;
+      }
+    })
+
+    console.log('applicableCities', applicableCities)
+    this.showResult(applicableCities)
+
+  }
+  
+  showResult(applicableCities) {
+
+    // $('.results').text(applicableCities[0].name)
+    // $('.results').val("helo")
   }
 
 }

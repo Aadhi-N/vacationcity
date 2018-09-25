@@ -1,6 +1,6 @@
 export class CityTemp {
   cityId: number;
-  month: number;
+  monthId: number;
   avgCelcius: number;
   avgHumidity: number
 } 

@@ -40,23 +40,19 @@ export class InMemoryDataService implements InMemoryDbService {
       {
         id: 1,
         name: "Toronto",
-        city_temp: ""
       },
       {
         id: 2,
         name: "Tokyo",
-        city_temp: ""
       },
       {
         id: 3,
         name: "Los Angeles",
-        city_temp: ""
       },
       {
         id: 4,
         name: "Alyeska",
-        city_temp: ""
-      }
+        }
     ];
 
     const cityTemps = [
