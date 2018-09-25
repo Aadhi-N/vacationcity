@@ -66,8 +66,17 @@ export class InputFormComponent implements OnInit {
   getCities(): void {
     this.cityService.getCities()
       .subscribe(cities => {
-        this.cities = cities
-        // console.log('getcities', this.cities)
+          //iterate each city object, filter tempsData; if cityId matches id, make cityTemp = cityId
+          for (let city of cities[0]) {
+            let cityArray = cities[1].filter(cityData => {
+              if (city.id == cityData.cityId) {
+                return cityData;
+              }
+            })
+            city.city_temp = cityArray;
+          }
+        this.cities = cities[0]
+        console.log('getcities', this.cities)
       })
   }
 
