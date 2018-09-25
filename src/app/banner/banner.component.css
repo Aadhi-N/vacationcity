@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css?family=Kirang+Haerang');
+
+
+#banner {
+	background-image: url(/assets/airplane.png);
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+	min-height: 900px;
+}
+
+#title-row{
+	min-height: 2vw;
+	/*padding: 50px;*/
+}
+
+
+#title {
+	font-family: 'Kirang Haerang', cursive;
+	font-size: 8vw;
+	color: black;
+	letter-spacing: 8px;
+	text-align: center;
+	padding: 50px;
+}
+
+#slogan-row {
+	margin: 400px 100px 50px 100px;
+	/*padding-top: 100px;*/
+	/*padding: 50px 50px 0px 50px;*/
+}
+
+#slogan {
+	font-size: 3vw;
+}
+
+
+#start-button-row {
+	margin: 0px 100px 0px 100px;
+	padding-bottom:50px;
+}
+
+#start-button{
+	border-radius: 20px;
+}
+

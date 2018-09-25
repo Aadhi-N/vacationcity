@@ -66,7 +66,6 @@ export class InputFormComponent implements OnInit {
   getCities(): void {
     this.cityService.getCities()
       .subscribe(cities => {
-          //iterate each city object, filter tempsData; if cityId matches id, make cityTemp = cityId
           for (let city of cities[0]) {
             let cityArray = cities[1].filter(cityData => {
               if (city.id == cityData.cityId) {
@@ -76,7 +75,7 @@ export class InputFormComponent implements OnInit {
             city.city_temp = cityArray;
           }
         this.cities = cities[0]
-        console.log('getcities', this.cities)
+        // console.log('getcities()', this.cities)
       })
   }
 
@@ -84,7 +83,6 @@ export class InputFormComponent implements OnInit {
     this.cityTempService.getCityTemps()
       .subscribe(cityTemps => {
         this.cityTemps = cityTemps
-        // console.log('citytemps', this.cityTemps)
       })
   }
 
@@ -107,10 +105,8 @@ export class InputFormComponent implements OnInit {
 
   onMonthClick(event): void {
     if (this.selectedMonth == undefined) {
-      // this.selectedMonth = 1;
     }
     this.selectedMonth = Number(event.target.value);
-    // console.log('onMonthClick', typeof this.selectedMonth)
   }
 
   tempSlider(event): void {
@@ -122,78 +118,61 @@ export class InputFormComponent implements OnInit {
   }
 
   showData() {
-    let temperaturesForSelectedMonth = this.cityTemps.filter(cityTemp => {
-      if (cityTemp.monthId === this.selectedMonth) {
-        return cityTemp;
-      }
-    })
 
-    let filteredTemperatures = temperaturesForSelectedMonth.filter(temp => {
-      // console.log('temp', temp)
-      if (((this.selectedTemp - 10) < temp.avgCelcius) && (temp.avgCelcius < (this.selectedTemp + 10))) {
-        return temp;
-      }
-    })
+    let fCities;
 
-    let filteredHumidity = filteredTemperatures.filter(humidity => {
-      if (((this.selectedHumidity - 10) < humidity.avgHumidity) && (humidity.avgHumidity < (this.selectedHumidity + 10))) {
-        return humidity;
-      }
-    })
+   let filteredCities = this.cities.filter(eachCity => {
+      // console.log(eachCity.city_temp)
+      return fCities = eachCity.city_temp;
+   })
 
-    // take array of objects, convert into array of integers 
+   this.showResult(filteredCities)
 
-    let loopedArray = [];
-    let i = 0;
-    for (i; i < filteredHumidity.length; i++) {
-      loopedArray.push(filteredHumidity[i].cityId)
+   console.log('outside', filteredCities)
+   console.log('this.cities', this.cities)
+    
 
-    }
+    // let filteredTemperatures = temperaturesForSelectedMonth.filter(temp => {
+    //   // console.log('temp', temp)
+    //   if (((this.selectedTemp - 10) < temp.avgCelcius) && (temp.avgCelcius < (this.selectedTemp + 10))) {
+    //     return temp;
+    //   }
+    // })
 
-    console.log('loopedArray', loopedArray)
+    // let filteredHumidity = filteredTemperatures.filter(humidity => {
+    //   if (((this.selectedHumidity - 10) < humidity.avgHumidity) && (humidity.avgHumidity < (this.selectedHumidity + 10))) {
+    //     return humidity;
+    //   }
+    // })
 
-    let applicableCities = this.cities.filter(city => {
-      if (loopedArray.includes(city.id)) {
-        return city.name;
-        // return avgCelcius, avgHumidity
-      }
-    })
+    // // take array of objects, convert into array of integers 
 
-    console.log('applicableCities', applicableCities)
-    this.showResult(applicableCities)
+    // let loopedArray = [];
+    // let i = 0;
+    // for (i; i < filteredHumidity.length; i++) {
+    //   loopedArray.push(filteredHumidity[i].cityId)
+
+    // }
+
+    // console.log('loopedArray', loopedArray)
+
+    // let applicableCities = this.cities.filter(city => {
+    //   if (loopedArray.includes(city.id)) {
+    //     return city.name;
+    //     // return avgCelcius, avgHumidity
+    //   }
+    // })
+
+    // console.log('applicableCities', applicableCities)
+    // this.showResult(applicableCities)
 
   }
   
-  showResult(applicableCities) {
-
+  showResult(data) {
+    console.log('showResult()', data)
     // $('.results').text(applicableCities[0].name)
     // $('.results').val("helo")
   }
 
 }
 
-/*PSEUDO FUNCTION FOR FILTER LOGIC
-
-  let city_id = cityTemps[cityId];
-  let val;
-
-  if selectedMonth[id] === cityTemps[monthId], show results.
-
-  city_id = selectedMonth[id];
-
-
-
-  if selectedMonth[id] === cityTemps[monthId]
-    &&
-      if ((selectedTemp == avgCelcius) || (selectedTemp > avgCelcius + 5) || (selectedTemp < avgCelcius - 5)
-
-    &&
-      if ((selectedHumidity == avgHumidity) || (selectedHumidity > avgHUmidity + 10) || (selectedHumidity < avgHumidty - 10))
-  
-   ///selectedMonth[id] = cityTemps[cityId];
-
-  return city_id = cities[name];
-
-
-
-*/

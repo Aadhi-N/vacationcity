@@ -9,14 +9,14 @@
 <br />
 <label>The temperature should be around: <span id="amount">{{selectedTemp}} degrees.</span>
 <br />
-  <input *ngFor="let temp of temps" type="range" id="range" [min]=temp.range.low [max]="temp.range.high" [value]="0" step="1" [(ngModel)]="selectedTemp" (ngModelChange)="tempSlider($event)">
+  <input *ngFor="let temp of temps" type="range" id="range" [min]=temp.range.low [max]="temp.range.high" [value]="0" step="5" [(ngModel)]="selectedTemp" (ngModelChange)="tempSlider($event)">
 </label>
 
 
 <br />
 <label>The humidity should be around: <span id="amount">{{selectedHumidity}}%.</span>
 <br />
-  <input *ngFor="let hum of humidity" type="range" id="range" [min]="hum.range.low" [max]="hum.range.high" [value]="100" step="1" [(ngModel)]="selectedHumidity" (ngModelChange)="humiditySlider($event)">
+  <input *ngFor="let hum of humidity" type="range" id="range" [min]="hum.range.low" [max]="hum.range.high" [value]="100" step="5" [(ngModel)]="selectedHumidity" (ngModelChange)="humiditySlider($event)">
 </label>
 
 
