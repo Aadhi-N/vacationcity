@@ -48,13 +48,14 @@ export class InputFormComponent implements OnInit {
     this.getHumidity();
     // this.showDropdown();
     this.onMonthClick(event);
-    // this.filteredMonth=[];
   }
 
   ngAfterViewInit() {
     this.tempSlider(event);
     this.humiditySlider(event);
     this.showData();
+    this.metric();
+    this.metric1();
   }
 
   //DISPLAYS LIST OF MONTHS FROM DATA SOURCE
@@ -110,11 +111,45 @@ export class InputFormComponent implements OnInit {
   }
 
   tempSlider(event): void {
-    this.selectedTemp = event;
+    if (!event) {
+      this.selectedTemp = 0;
+    } else {
+      this.selectedTemp = event;
+    }
   }
 
   humiditySlider(event): void {
-    this.selectedHumidity = event;
+    if (!event) {
+      this.selectedHumidity = 50;
+    } else {
+      this.selectedHumidity = event;
+    }
+  }
+
+  metric(event) {
+      if ($('#farenheit').click()) {
+          $("#farenheit").css({
+            "color": "black",
+            "cursor": "auto"
+          });
+          $("#celcius").css({
+            "color": "blue", 
+            "cursor": "pointer"
+          });
+      }  
+  }
+
+  metric1(event) {
+      if ($('#celcius').click()) {
+          $("#farenheit").css({
+            "color": "blue",
+            "cursor": "pointer"
+            );
+          $("#celcius").css({
+            "color": "black",
+            "cursor": "auto"
+            });
+      } 
   }
 
   showData() {

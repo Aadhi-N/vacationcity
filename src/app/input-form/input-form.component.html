@@ -1,28 +1,36 @@
 
-  I want to travel in 
+<div class="row" id="input-form">
+  <div class="row" id="select-month-row">
+   I want to travel in
+  <select name="Month" class="dropdown" id="select-month" (click)="onMonthClick($event)">
+    <option *ngFor="let month of months" [value]="month.id">{{month.name}}</option>
+  </select>
+</div>
+ 
+ <div class="row" id="select-temp">
+  <label>The temperature should be around: <span id="amount">{{selectedTemp}}</span>  ° 
+    <span id="celcius" (click)="metric1()">Celcius</span> | <span id="farenheit" (click)="metric()">Farenheit</span>
 
-  <!-- SEMANTIC UI DROPDOWN -->
-<select name="Month" class="ui dropdown" id="select" (click)="onMonthClick($event)" >
-  <option *ngFor="let month of months" [value]="month.id">{{month.name}}</option>
-</select>
+    <br />
 
-<br />
-<label>The temperature should be around: <span id="amount">{{selectedTemp}} degrees.</span>
-<br />
-  <input *ngFor="let temp of temps" type="range" id="range" [min]=temp.range.low [max]="temp.range.high" [value]="0" step="5" [(ngModel)]="selectedTemp" (ngModelChange)="tempSlider($event)">
-</label>
-
-
-<br />
-<label>The humidity should be around: <span id="amount">{{selectedHumidity}}%.</span>
-<br />
-  <input *ngFor="let hum of humidity" type="range" id="range" [min]="hum.range.low" [max]="hum.range.high" [value]="100" step="5" [(ngModel)]="selectedHumidity" (ngModelChange)="humiditySlider($event)">
-</label>
-
-
-<div>
-<button class="ui button" (click)="showData()">Submit</button>
+    <div class="slider">
+      <input *ngFor="let temp of temps" type="range" id="range" [min]=temp.range.low [max]="temp.range.high" [value]="0" step="5" [(ngModel)]="selectedTemp" (ngModelChange)="tempSlider($event)">
+    </div>
+  </label>
 </div>
 
+ <div class="row" id="select-humidity">
+  <label>The humidity should be around: <span id="amount">{{selectedHumidity}}</span> %
+    <br />
 
-<span class="results" value=""></span>
+    <div id="slider">
+      <input *ngFor="let hum of humidity" type="range" id="range" [min]="hum.range.low" [max]="hum.range.high" [value]="100" step="5" [(ngModel)]="selectedHumidity" (ngModelChange)="humiditySlider($event)">
+    </div>
+  </label>
+</div>
+
+  <div>
+    <button class="ui button" (click)="showData()">Submit</button>
+  </div>
+  <span class="results" value=""></span>
+</div>

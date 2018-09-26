@@ -1,9 +1,10 @@
-@import url('https://fonts.googleapis.com/css?family=Kirang+Haerang');
 
+#sun {
+}
 
 #banner {
-	background-image: url(/assets/airplane.png);
-	background-size: contain;
+	background-image: url(/assets/cropped.png);
+	background-size: cover;
 	background-repeat: no-repeat;
 	background-position: center;
 	min-height: 900px;
@@ -21,26 +22,67 @@
 	color: black;
 	letter-spacing: 8px;
 	text-align: center;
-	padding: 50px;
+	padding-top: 50px;
 }
 
 #slogan-row {
-	margin: 400px 100px 50px 100px;
+	margin: 20px 100px 20px 100px;
 	/*padding-top: 100px;*/
 	/*padding: 50px 50px 0px 50px;*/
 }
 
 #slogan {
 	font-size: 3vw;
+	text-align: center;
+		font-family: 'Didact Gothic', sans-serif;
+	letter-spacing: 3px;
 }
 
 
 #start-button-row {
-	margin: 0px 100px 0px 100px;
-	padding-bottom:50px;
+	margin: 10px 100px 0px 100px;
+	padding-bottom:70px;
+	padding-top: 50px;
+	text-align: center;
 }
 
 #start-button{
-	border-radius: 20px;
+	box-shadow: 0 6px #ab3c3c;
+	border-radius: 40px;
+	background-color: #ff8a00;
+	color: #000;
 }
 
+#start-button:hover {
+	box-shadow: 0 4px #ab3c3c;
+	top: 2px;
+	background-color: #e67a00
+}
+
+#start-button:active {
+	box-shadow: 0 0 #e67a00;
+	top: 6px;
+}
+
+
+#down-arrow {
+	padding-left: 10px;
+}
+
+/*.dot {
+    height: 25px;
+    width: 25px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+}
+*/
+
+
+#input-form {
+	text-align: center;
+	background-image: linear-gradient(to bottom right, #8cd98c, #339933);
+	font-family: 'Didact Gothic', sans-serif;
+	letter-spacing: 2px;
+	padding-top: 80px;
+}
