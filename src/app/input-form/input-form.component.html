@@ -2,9 +2,10 @@
 <div class="row" id="input-form">
   <div class="row" id="select-month-row">
    I want to travel in
-  <select name="Month" class="dropdown" id="select-month" (click)="onMonthClick($event)">
+  <select name="Month" id="select-month" (click)="onMonthClick($event)">
     <option *ngFor="let month of months" [value]="month.id">{{month.name}}</option>
   </select>
+
 </div>
  
  <div class="row" id="select-temp">
@@ -20,17 +21,17 @@
 </div>
 
  <div class="row" id="select-humidity">
-  <label>The humidity should be around: <span id="amount">{{selectedHumidity}}</span> %
+  <label>The <span id="humidity-text" data-tooltip="Humidity is the amount of water vapour in the air. The higher the relative humidity, the hotter you will feel." data-position="top center">humidity</span> should be around: <span id="amount">{{selectedHumidity}}</span> %
     <br />
 
-    <div id="slider">
+    <div class="slider">
       <input *ngFor="let hum of humidity" type="range" id="range" [min]="hum.range.low" [max]="hum.range.high" [value]="100" step="5" [(ngModel)]="selectedHumidity" (ngModelChange)="humiditySlider($event)">
     </div>
   </label>
 </div>
 
   <div>
-    <button class="ui button" (click)="showData()">Submit</button>
+    <button class="ui huge button" (click)="showData()" id="submit-data-button">Submit</button>
   </div>
   <span class="results" value=""></span>
 </div>

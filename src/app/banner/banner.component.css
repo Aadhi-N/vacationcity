@@ -47,14 +47,14 @@
 }
 
 #start-button{
-	box-shadow: 0 6px #ab3c3c;
+	box-shadow: 0 6px #c1530b;
 	border-radius: 40px;
 	background-color: #ff8a00;
-	color: #000;
+	color: #fff;
 }
 
 #start-button:hover {
-	box-shadow: 0 4px #ab3c3c;
+	box-shadow: 0 4px #c1530b;
 	top: 2px;
 	background-color: #e67a00
 }

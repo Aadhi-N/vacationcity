@@ -5,11 +5,15 @@
 	font-family: 'Didact Gothic', sans-serif;
 	font-size: 2vw;
 	letter-spacing: 2px;
-	padding-top: 80px;
+	padding-top: 50px;
 }
 
 #select-month-row {
 	margin: 70px;
+}
+
+#select-month {
+	font-weight: bold;
 }
 
 #select-temp {
@@ -30,6 +34,7 @@
 #amount {
 	border-bottom: 1px solid #000;
 	padding-bottom: 5px;
+	font-weight: bold;
 }
 
 #celcius {
@@ -39,6 +44,34 @@
 #farenheit {
 	color: blue;
 	cursor: pointer;
+	font-weight: bold;
+}
+
+#humidity-text {
+	border-bottom: 3px dotted #135823;
+	padding-bottom: 5px;
+
+}
+
+
+#submit-data-button{
+	margin-bottom: 50px;
+	box-shadow: 0 6px #0e60c5;
+	border-radius: 40px;
+	background-color: #2185d0;
+	color: #fff;
+
+}
+
+#submit-data-button:hover {
+	box-shadow: 0 4px #0e60c5;
+	top: 2px;
+	background-color: #2185d0
+}
+
+#submit-data-button:active {
+	box-shadow: 0 0 #e67a00;
+	top: 6px;
 }
 
 .slider {

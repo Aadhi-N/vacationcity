@@ -130,11 +130,13 @@ export class InputFormComponent implements OnInit {
       if ($('#farenheit').click()) {
           $("#farenheit").css({
             "color": "black",
-            "cursor": "auto"
+            "cursor": "auto",
+            "font-weight": "normal"
           });
           $("#celcius").css({
             "color": "blue", 
-            "cursor": "pointer"
+            "cursor": "pointer",
+            "font-weight": "bold"
           });
       }  
   }
@@ -143,11 +145,13 @@ export class InputFormComponent implements OnInit {
       if ($('#celcius').click()) {
           $("#farenheit").css({
             "color": "blue",
-            "cursor": "pointer"
-            );
+            "cursor": "pointer",
+            "font-weight": "bold"
+            });
           $("#celcius").css({
             "color": "black",
             "cursor": "auto"
+            "font-weight": "normal"
             });
       } 
   }

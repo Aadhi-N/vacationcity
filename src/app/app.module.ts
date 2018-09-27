@@ -12,13 +12,17 @@ import { AppComponent } from './app.component';
 import { BannerComponent } from './banner/banner.component';
 import { MessagesComponent } from './messages/messages.component';
 import { InputFormComponent } from './input-form/input-form.component';
+import { SearchResultaComponent } from './search-resulta/search-resulta.component';
+import { SearchResultsComponent } from './search-results/search-results.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     BannerComponent,
     MessagesComponent,
-    InputFormComponent
+    InputFormComponent,
+    SearchResultaComponent,
+    SearchResultsComponent
   ],
   imports: [
     BrowserModule,
