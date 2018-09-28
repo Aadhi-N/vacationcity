@@ -37,6 +37,9 @@ export class InputFormComponent implements OnInit {
 
   filteredMonth: any[];
 
+  celciusActive = true;
+  farenheitActive = true;
+
 
   constructor(private monthService: MonthService, private cityService: CityService, private cityTempService: CityTempService, private tempService: TempService, private humidityService: HumidityService) { }
 
@@ -46,19 +49,21 @@ export class InputFormComponent implements OnInit {
     this.getCityTemps();
     this.getTemps();
     this.getHumidity();
-    // this.showDropdown();
     this.onMonthClick(event);
+    this.getCelcius(event);
   }
 
   ngAfterViewInit() {
     this.tempSlider(event);
     this.humiditySlider(event);
-    this.showData();
-    this.metric(event);
-    this.metric1(event);
+    // this.showData();
+    this.setMetric(event);
   }
 
+ 
+
   //DISPLAYS LIST OF MONTHS FROM DATA SOURCE
+
    getMonths(): void {
     this.monthService.getMonths()
       .subscribe(months => this.months = months);
@@ -98,16 +103,13 @@ export class InputFormComponent implements OnInit {
       })
   }
 
-  // showDropdown(): void {
-  //   $('.ui.dropdown')
-  //     .dropdown()
-  //   ;
-  // }
 
   onMonthClick(event): void {
     if (this.selectedMonth == undefined) {
-    }
-    this.selectedMonth = Number(event.target.value);
+      this.selectedMonth = "January"
+    } else {
+        this.selectedMonth = Number(event.target.value)
+      };
   }
 
   tempSlider(event): void {
@@ -126,34 +128,10 @@ export class InputFormComponent implements OnInit {
     }
   }
 
-  metric(event) {
-      if ($('#farenheit').click()) {
-          $("#farenheit").css({
-            "color": "black",
-            "cursor": "auto",
-            "font-weight": "normal"
-          });
-          $("#celcius").css({
-            "color": "blue", 
-            "cursor": "pointer",
-            "font-weight": "bold"
-          });
-      }  
-  }
-
-  metric1(event) {
-      if ($('#celcius').click()) {
-          $("#farenheit").css({
-            "color": "blue",
-            "cursor": "pointer",
-            "font-weight": "bold"
-            });
-          $("#celcius").css({
-            "color": "black",
-            "cursor": "auto",
-            "font-weight": "normal"
-            });
-      } 
+  setMetric(event) {
+    this.celciusActive = !this.celciusActive;
+    this.farenheitActive = !this.farenheitActive;
+    this.farenheitActive ? this.selectedTemp = 32 : this.selectedTemp = 0;
   }
 
   showData() {
@@ -167,8 +145,8 @@ export class InputFormComponent implements OnInit {
 
    this.showResult(filteredCities)
 
-   console.log('outside', filteredCities)
-   console.log('this.cities', this.cities)
+   // console.log('outside', filteredCities)
+   // console.log('this.cities', this.cities)
     
 
     // let filteredTemperatures = temperaturesForSelectedMonth.filter(temp => {
@@ -208,10 +186,12 @@ export class InputFormComponent implements OnInit {
   }
   
   showResult(data) {
-    console.log('showResult()', data)
+    // console.log('showResult()', data)
     // $('.results').text(applicableCities[0].name)
     // $('.results').val("helo")
   }
+
+
 
 }
 

@@ -13,7 +13,6 @@ export class SearchResultsComponent implements OnInit {
 
   ngOnInit() {
     this.specialCards(event);
-    this.scroll(event);
   }
 
   specialCards(event) {
