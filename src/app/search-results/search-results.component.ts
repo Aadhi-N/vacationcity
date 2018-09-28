@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+declare var $: any;
+
 
 @Component({
   selector: 'app-search-results',
@@ -10,7 +12,8 @@ export class SearchResultsComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.specialCards;
+    this.specialCards(event);
+    this.scroll(event);
   }
 
   specialCards(event) {
@@ -18,5 +21,10 @@ export class SearchResultsComponent implements OnInit {
       on: 'hover'
     });
   }
+
+  // scroll(event) {
+  //   $('#search-results').scrollIntoView();
+  //   console.log('dh')
+  // }
 
 }

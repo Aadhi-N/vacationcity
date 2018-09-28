@@ -1,7 +1,4 @@
 
-#sun {
-}
-
 #banner {
 	background-image: url(/assets/cropped.png);
 	background-size: cover;
@@ -12,9 +9,7 @@
 
 #title-row{
 	min-height: 2vw;
-	/*padding: 50px;*/
 }
-
 
 #title {
 	font-family: 'Kirang Haerang', cursive;
@@ -27,8 +22,6 @@
 
 #slogan-row {
 	margin: 20px 100px 20px 100px;
-	/*padding-top: 100px;*/
-	/*padding: 50px 50px 0px 50px;*/
 }
 
 #slogan {
@@ -68,16 +61,6 @@
 #down-arrow {
 	padding-left: 10px;
 }
-
-/*.dot {
-    height: 25px;
-    width: 25px;
-    background-color: #bbb;
-    border-radius: 50%;
-    display: inline-block;
-}
-*/
-
 
 #input-form {
 	text-align: center;

@@ -12,8 +12,8 @@ import { AppComponent } from './app.component';
 import { BannerComponent } from './banner/banner.component';
 import { MessagesComponent } from './messages/messages.component';
 import { InputFormComponent } from './input-form/input-form.component';
-import { SearchResultaComponent } from './search-resulta/search-resulta.component';
 import { SearchResultsComponent } from './search-results/search-results.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -21,8 +21,8 @@ import { SearchResultsComponent } from './search-results/search-results.componen
     BannerComponent,
     MessagesComponent,
     InputFormComponent,
-    SearchResultaComponent,
-    SearchResultsComponent
+    SearchResultsComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

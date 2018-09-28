@@ -54,8 +54,8 @@ export class InputFormComponent implements OnInit {
     this.tempSlider(event);
     this.humiditySlider(event);
     this.showData();
-    this.metric();
-    this.metric1();
+    this.metric(event);
+    this.metric1(event);
   }
 
   //DISPLAYS LIST OF MONTHS FROM DATA SOURCE
@@ -150,7 +150,7 @@ export class InputFormComponent implements OnInit {
             });
           $("#celcius").css({
             "color": "black",
-            "cursor": "auto"
+            "cursor": "auto",
             "font-weight": "normal"
             });
       } 
