@@ -40,23 +40,13 @@
   color: blue;
   cursor: pointer;
   font-weight: bold;
-  /*pointer-events: !important auto;*/
 }
-
-/*.farenheit1 {
-	pointer-events: none;
-}*/
 
 .celcius {
   color: blue;
   cursor: pointer;
   font-weight: bold;
-  /*pointer-events: !important auto*/
 }
-
-/*#celcius {
-	pointer-events: initial;
-}*/
 
 .showCelcius {
   display: none;
@@ -157,12 +147,4 @@ input[type=range]::-webkit-slider-runnable-track {
 
 select {
   font-family: 'Didact Gothic', sans-serif;
-}
-
-.testclass {
-  color: yellow;
-}
-
-.extraclass {
-  color: red;
 }

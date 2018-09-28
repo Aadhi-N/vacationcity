@@ -40,6 +40,8 @@ export class InputFormComponent implements OnInit {
   celciusActive = true;
   farenheitActive = true;
 
+  preSubmit: any;
+
 
   constructor(private monthService: MonthService, private cityService: CityService, private cityTempService: CityTempService, private tempService: TempService, private humidityService: HumidityService) { }
 
@@ -50,14 +52,14 @@ export class InputFormComponent implements OnInit {
     this.getTemps();
     this.getHumidity();
     this.onMonthClick(event);
-    this.getCelcius(event);
+    this.setMetric(event);
+    this.humiditySlider(event);
   }
 
   ngAfterViewInit() {
     this.tempSlider(event);
-    this.humiditySlider(event);
     // this.showData();
-    this.setMetric(event);
+    // this.showResult(event);
   }
 
  
@@ -105,27 +107,15 @@ export class InputFormComponent implements OnInit {
 
 
   onMonthClick(event): void {
-    if (this.selectedMonth == undefined) {
-      this.selectedMonth = "January"
-    } else {
-        this.selectedMonth = Number(event.target.value)
-      };
+    (this.selectedMonth == undefined) ? this.selectedMonth = 1 : this.selectedMonth = Number(event.target.value); 
   }
 
   tempSlider(event): void {
-    if (!event) {
-      this.selectedTemp = 0;
-    } else {
-      this.selectedTemp = event;
-    }
+    (!event) ? this.selectedTemp = 0 : this.selectedTemp = event;
   }
 
   humiditySlider(event): void {
-    if (!event) {
-      this.selectedHumidity = 50;
-    } else {
-      this.selectedHumidity = event;
-    }
+    (!event) ? this.selectedHumidity = 50 : this.selectedHumidity = event;
   }
 
   setMetric(event) {
@@ -136,18 +126,27 @@ export class InputFormComponent implements OnInit {
 
   showData() {
 
-    let fCities;
+    console.log('this cities', this.cities)
 
-   let filteredCities = this.cities.filter(eachCity => {
-      // console.log(eachCity.city_temp)
-      return fCities = eachCity.city_temp;
-   })
+    let filteredCities = [];
 
-   this.showResult(filteredCities)
+    for (let i = 0; i < this.cities.length; i++) {
+      let cityTemp = this.cities[i].city_temp[this.selectedMonth -1];
+      
+      if (!((cityTemp.avgCelcius < (this.selectedTemp + 10)) && (cityTemp.avgCelcius > (this.selectedTemp - 10))))
+        continue;
 
-   // console.log('outside', filteredCities)
-   // console.log('this.cities', this.cities)
-    
+      if (!((cityTemp.avgHumidity < (this.selectedHumidity + 10)) && (cityTemp.avgHumidity > (this.selectedHumidity - 10))))
+        continue;
+
+      filteredCities.push(cityTemp)
+    }
+
+    for (let filteredCity of filteredCities) {
+      console.log(this.cities[filteredCity.cityId - 1].name)
+    }
+
+
 
     // let filteredTemperatures = temperaturesForSelectedMonth.filter(temp => {
     //   // console.log('temp', temp)
@@ -162,33 +161,18 @@ export class InputFormComponent implements OnInit {
     //   }
     // })
 
-    // // take array of objects, convert into array of integers 
 
-    // let loopedArray = [];
-    // let i = 0;
-    // for (i; i < filteredHumidity.length; i++) {
-    //   loopedArray.push(filteredHumidity[i].cityId)
-
-    // }
-
-    // console.log('loopedArray', loopedArray)
-
-    // let applicableCities = this.cities.filter(city => {
-    //   if (loopedArray.includes(city.id)) {
-    //     return city.name;
-    //     // return avgCelcius, avgHumidity
-    //   }
-    // })
-
-    // console.log('applicableCities', applicableCities)
-    // this.showResult(applicableCities)
+    // this.showResult()
 
   }
   
-  showResult(data) {
-    // console.log('showResult()', data)
-    // $('.results').text(applicableCities[0].name)
-    // $('.results').val("helo")
+  showResult() {
+    // this.preSubmit = {
+    //   smonth: this.selectedMonth,
+    //   stemp: this.selectedTemp,
+    //   shumidity: this.selectedHumidity
+    // }
+    // console.log('showResult()', this.preSubmit)
   }
 
 
