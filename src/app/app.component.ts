@@ -12,11 +12,9 @@ import { DataService } from "./data.service";
 export class AppComponent {
   title = 'My Vacation City';
 
-   month:string;
 
   constructor(private data: DataService) { }
 
   ngOnInit() {
-    this.data.monthMessage.subscribe(month => this.month = month)
   }
 }

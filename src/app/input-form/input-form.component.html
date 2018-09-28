@@ -27,7 +27,11 @@
     </label>
   </div>
   <div>
-    <button class="ui huge button" (click)="showData()" id="submit-data-button">Submit</button>
+    <button class="ui huge button" (click)="showData(); displayResults()" id="submit-data-button">Submit</button>
   </div>
-  <!-- <span class="results" >RESULTS: Month: {{preSubmit.smonth}}, Temp: {{preSubmit.stemp}}, Humidity: {{preSubmit.shumidity}}</span> -->
+
+    <div *ngFor="let result of displaySearchResults">RESULTS City: {{result.name}}, Temp: {{result.avgCelcius}}, Humidity: {{result.avgHumidity}}</div>
 </div>
+
+
+

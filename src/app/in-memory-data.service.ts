@@ -135,8 +135,8 @@ export class InMemoryDataService implements InMemoryDbService {
       {
         cityId: 2,
         monthId: 1,
-        avgCelcius: -3,
-        avgHumidity: 45
+        avgCelcius: -10,
+        avgHumidity: 80
       },
       {
         cityId: 2,

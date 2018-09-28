@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DataService } from "../data.service";
 import { NgForm } from "@angular/forms";
 
 declare var $: any;
@@ -40,10 +41,14 @@ export class InputFormComponent implements OnInit {
   celciusActive = true;
   farenheitActive = true;
 
-  preSubmit: any;
+  filteredSearchResults: any;
+  displaySearchResults: any;
+
+  message: string;
+  testMessage = "test from sib"
 
 
-  constructor(private monthService: MonthService, private cityService: CityService, private cityTempService: CityTempService, private tempService: TempService, private humidityService: HumidityService) { }
+  constructor(private monthService: MonthService, private cityService: CityService, private cityTempService: CityTempService, private tempService: TempService, private humidityService: HumidityService, private data: DataService) { }
 
   ngOnInit() {
     this.getMonths();
@@ -54,15 +59,15 @@ export class InputFormComponent implements OnInit {
     this.onMonthClick(event);
     this.setMetric(event);
     this.humiditySlider(event);
+    // this.searchResult();
+    this.data.currentMessage.subscribe(message => this.message = message)
+
+    this.data.searchResultMessage.subscribe(searchResult => this.displaySearchResults = searchResult);
   }
 
   ngAfterViewInit() {
     this.tempSlider(event);
-    // this.showData();
-    // this.showResult(event);
   }
-
- 
 
   //DISPLAYS LIST OF MONTHS FROM DATA SOURCE
 
@@ -124,11 +129,16 @@ export class InputFormComponent implements OnInit {
     this.farenheitActive ? this.selectedTemp = 32 : this.selectedTemp = 0;
   }
 
+  displayResults() {
+    this.data.changeSearchResultMessage(this.displaySearchResults)
+  }
+
   showData() {
 
-    console.log('this cities', this.cities)
+  this.displayResults();
 
     let filteredCities = [];
+    let cityResults = [];
 
     for (let i = 0; i < this.cities.length; i++) {
       let cityTemp = this.cities[i].city_temp[this.selectedMonth -1];
@@ -142,40 +152,14 @@ export class InputFormComponent implements OnInit {
       filteredCities.push(cityTemp)
     }
 
+    // PUSH FILTERED RESULTS INTO PROPERTY 
     for (let filteredCity of filteredCities) {
-      console.log(this.cities[filteredCity.cityId - 1].name)
+      cityResults.push({name: this.cities[filteredCity.cityId - 1].name, avgCelcius: filteredCity.avgCelcius, avgHumidity: filteredCity.avgHumidity})
     }
 
-
-
-    // let filteredTemperatures = temperaturesForSelectedMonth.filter(temp => {
-    //   // console.log('temp', temp)
-    //   if (((this.selectedTemp - 10) < temp.avgCelcius) && (temp.avgCelcius < (this.selectedTemp + 10))) {
-    //     return temp;
-    //   }
-    // })
-
-    // let filteredHumidity = filteredTemperatures.filter(humidity => {
-    //   if (((this.selectedHumidity - 10) < humidity.avgHumidity) && (humidity.avgHumidity < (this.selectedHumidity + 10))) {
-    //     return humidity;
-    //   }
-    // })
-
-
-    // this.showResult()
-
+      // ASSIGN PROPERTY TO MESSAGE SERVICE 
+      this.filteredSearchResults = cityResults
+      this.displaySearchResults = this.filteredSearchResults
   }
-  
-  showResult() {
-    // this.preSubmit = {
-    //   smonth: this.selectedMonth,
-    //   stemp: this.selectedTemp,
-    //   shumidity: this.selectedHumidity
-    // }
-    // console.log('showResult()', this.preSubmit)
-  }
-
-
-
 }
 
