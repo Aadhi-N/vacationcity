@@ -43,10 +43,7 @@ export class InputFormComponent implements OnInit {
 
   filteredSearchResults: any;
   displaySearchResults: any;
-
-  message: string;
-  testMessage = "test from sib"
-
+  displaySearchQuery: any;
 
   constructor(private monthService: MonthService, private cityService: CityService, private cityTempService: CityTempService, private tempService: TempService, private humidityService: HumidityService, private data: DataService) { }
 
@@ -59,10 +56,10 @@ export class InputFormComponent implements OnInit {
     this.onMonthClick(event);
     this.setMetric(event);
     this.humiditySlider(event);
-    // this.searchResult();
-    this.data.currentMessage.subscribe(message => this.message = message)
 
     this.data.searchResultMessage.subscribe(searchResult => this.displaySearchResults = searchResult);
+
+    this.data.searchQueryMessage.subscribe(searchQuery => this.displaySearchQuery = searchQuery);
   }
 
   ngAfterViewInit() {
@@ -129,13 +126,18 @@ export class InputFormComponent implements OnInit {
     this.farenheitActive ? this.selectedTemp = 32 : this.selectedTemp = 0;
   }
 
+  displayQuery() {
+    this.data.changeSearchQueryMessage([{monthQuery: this.selectedMonth, tempQuery: this.selectedTemp, humidityQuery: this.selectedHumidity}])
+  }
+
   displayResults() {
     this.data.changeSearchResultMessage(this.displaySearchResults)
   }
 
   showData() {
 
-  this.displayResults();
+    this.displayQuery();
+    this.displayResults();
 
     let filteredCities = [];
     let cityResults = [];

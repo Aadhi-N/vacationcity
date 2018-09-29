@@ -65,6 +65,11 @@
 	background-color: transparent;
 }
 
+#pagination-row {
+	text-align: center;
+	padding: 50px;
+}
+
 #tile-pagination {
 	max-height: 20px;
 	position: relative;
@@ -72,13 +77,17 @@
     margin-right: 10%;
 }
 
+#filter-again-button-row {
+	text-align: center;
+}
+
 #filter-again-button {
-	margin-bottom: 50px;
+	/*margin-bottom: 50px;*/
 	box-shadow: 0 6px #7d0909;
 	border-radius: 40px;
 	background-color: #b33a3a;
 	color: #fff;
-	margin: 30px;
+	/*margin: 30px;*/
 }
 
 #filter-again-button:hover {
@@ -93,9 +102,17 @@
 }
 
 
+
+
+
 .ui .statistic>.value {
 	font-size: 2.5rem!important;
 	text-align: left;
+
+}
+
+.ui.cards~.ui.cards {
+	margin-top: 0.9em;
 }
 
 hr {

@@ -1,43 +1,49 @@
 <div class="row" id="search-results">
+  <!-- ROW START -->
   <div class="ui huge header" id="search-message-title">Destinations that suit my weather preference:</div>
   <div class="ui stackable two column grid" id="shared-two-column">
+    <!-- STACKABLE COLUMN START -->
     <div class="ui segment column" id="tile-column">
-      <div class="ui header" id="search-message-result">Cities with "<em>0 degrees Celcius</em>" with "<em>50%</em>" humidity in the month of "<em>June</em>":
+      <!--UI SEGMENT COLUMN 1 START -->
+      <div class="ui header" id="search-message-result" *ngFor="let q of displaySearchQuery">Cities with "<em>{{q.tempQuery}} degrees Celcius</em>" with "<em>{{q.tempQuery}} %</em>" humidity in the month of "<em>{{q.monthQuery}}</em>":
       </div>
-
-
-
-      <!-- TILE GRID START -->
+      <!----------------------------- tile grid  -------------------------->
       <div class="ui four cards">
-        <!-- SINGLE TILE START -->
-        <div class="ui special cards" (click)="specialCards()">
+        <!-- FOUR CARDS START -->
+        <div class="ui special cards" id="special-cards" (click)="specialCards()" *ngFor="let result of displaySearchResults">
+          <!--UI SPECIAL CARDS START -->
           <div class="card" id="single-tiles">
+            <!-- SINGLE TILE START -->
             <div class="blurring dimmable image">
+              <!-- DIMMABLE IMAGE START -->
               <div class="ui inverted dimmer">
                 <div class="ui button">Locate on Maps</div>
               </div>
               <img src="/assets/destination.png">
-              <div class="ui huge label" id="city-label">TORONTO, CANADA
-              </div>
+              <div class="ui huge label" id="city-label">{{result.name}}</div>
             </div>
-            <!-- TILE CONTENT START -->
+            <!-- DIMMABLE IMAGE END -->
+            <!----------------------------- tile content  -------------------------->
             <div class="content">
+              <!-- TILE CONTENT START -->
               <div class="header">Avg. Temperature: </div>
-              <!-- TILE STATISTICS START-->
               <div class="row" id="statistic-row">
+                <!-- TILE STATISTICS START-->
                 <div class="ui horizontal statistic">
                   <div class="value">
-                    20°
+                    {{result.avgCelcius}}°
                   </div>
                   <div class="label">
                     Celcius° | Farenheit°
                   </div>
                 </div>
               </div>
+              <!-- TILE STATISTIC END -->
               <div class="row" id="statistic-row">
+                <!-- TILE STATISTICS START-->
                 <div class="ui horizontal statistic">
                   <div class="value">
-                    50%
+                    {{result.avgHumidity}}%
                   </div>
                   <div class="label">
                     Humidity
@@ -45,159 +51,70 @@
                 </div>
               </div>
               <!-- TILE STATISTIC END -->
-              <!-- TILE META COUNTRY START -->
-              <div class="meta" id="meta-source">
-                <a>Source: Canada Weather</a>
-              </div>
-              <!-- TILE META COUNTRY END -->
             </div>
             <!-- TILE CONTENT END -->
+            <div class="meta" id="meta-source">
+              <!-- TILE META COUNTRY START -->
+              <a>Source: Canada Weather</a>
+            </div>
+            <!-- TILE META COUNTRY END -->
+            <!----------------------------- tile content  -------------------------->
           </div>
           <!-- SINGLE TILE END -->
-          <!-- SINGLE TILE START -->
-          <div class="card" id="single-tiles">
-            <div class="blurring dimmable image">
-              <div class="ui inverted dimmer">
-                <div class="ui button">Locate on Maps</div>
-              </div>
-              <img src="/assets/destination.png">
-              <div class="ui huge label" id="city-label">TORONTO, CANADA
-              </div>
-            </div>
-            <!-- TILE CONTENT START -->
-            <div class="content">
-              <div class="header">Avg. Temperature: </div>
-              <!-- TILE STATISTICS START-->
-              <div class="row" id="statistic-row">
-                <div class="ui horizontal statistic">
-                  <div class="value">
-                    20°
-                  </div>
-                  <div class="label">
-                    Celcius° | Farenheit°
-                  </div>
-                </div>
-              </div>
-              <div class="row" id="statistic-row">
-                <div class="ui horizontal statistic">
-                  <div class="value">
-                    50%
-                  </div>
-                  <div class="label">
-                    Humidity
-                  </div>
-                </div>
-              </div>
-              <!-- TILE STATISTIC END -->
-              <!-- TILE META COUNTRY START -->
-              <div class="meta" id="meta-source">
-                <a>Source: Canada Weather</a>
-              </div>
-              <!-- TILE META COUNTRY END -->
-            </div>
-            <!-- TILE CONTENT END -->
-            <!-- SINGLE TILE END -->
-          </div>
-
-
-                    <!-- SINGLE TILE START -->
-          <div class="card" id="single-tiles">
-            <div class="blurring dimmable image">
-              <div class="ui inverted dimmer">
-                <div class="ui button">Locate on Maps</div>
-              </div>
-              <img src="/assets/destination.png">
-              <div class="ui huge label" id="city-label">TORONTO, CANADA
-              </div>
-            </div>
-            <!-- TILE CONTENT START -->
-            <div class="content">
-              <div class="header">Avg. Temperature: </div>
-              <!-- TILE STATISTICS START-->
-              <div class="row" id="statistic-row">
-                <div class="ui horizontal statistic">
-                  <div class="value">
-                    20°
-                  </div>
-                  <div class="label">
-                    Celcius° | Farenheit°
-                  </div>
-                </div>
-              </div>
-              <div class="row" id="statistic-row">
-                <div class="ui horizontal statistic">
-                  <div class="value">
-                    50%
-                  </div>
-                  <div class="label">
-                    Humidity
-                  </div>
-                </div>
-              </div>
-              <!-- TILE STATISTIC END -->
-              <!-- TILE META COUNTRY START -->
-              <div class="meta" id="meta-source">
-                <a>Source: Canada Weather</a>
-              </div>
-              <!-- TILE META COUNTRY END -->
-            </div>
-            <!-- TILE CONTENT END -->
-            <!-- SINGLE TILE END -->
-            <!-- UI FOUR CARDS END -->
+        </div>
+        <!--UI SPECIAL CARDS END -->
+      </div>
+      <!-- FOUR CARDS END -->
+      <!----------------------------- tile grid  -------------------------->
+      <!----------------------------- pagination  -------------------------->
+      <div class="row" id="pagination-row">
+        <div class="ui pagination menu" id="tile-pagination">
+          <!-- PAGINATION START -->
+          <a class="item">
+                  <i class="angle double left icon"></i>
+                </a>
+          <a class="item active">
+                  1
+                </a>
+          <a class="item">
+                  2
+                </a>
+          <a class="item">
+                  3
+                </a>
+          <a class="item">
+                  4
+                </a>
+          <a class="item">
+                  5
+                </a>
+          <a class="item">
+                  <i class="angle double right icon"></i>    
+                </a>
         </div>
       </div>
-
-          <!-- PAGINATION START -->
-            <div class="ui pagination menu" id="tile-pagination">
-              <a class="item">
-                <i class="angle double left icon"></i>
-              </a>
-              <a class="item active">
-                1
-              </a>
-              <a class="item">
-                2
-              </a>
-              <a class="item">
-                3
-              </a>
-              <a class="item">
-                4
-              </a>
-              <a class="item">
-                5
-              </a>
-               <a class="item">
-                <i class="angle double right icon"></i>
-                
-              </a>
-            </div>
-            <!-- PAGINATION END -->
-
-            <!-- FILTER AGAIN BUTTON START -->
-            <div class="ui huge button" id="filter-again-button">Filter again</div>
-            <!-- FILTER AGAIN BUTTON END -->
-
+      <!-- PAGINATION END -->
+      <!----------------------------- pagination  -------------------------->
+      <!----------------------------- filter button  -------------------------->
+      <div class="row" id="filter-again-button-row">
+        <div class="ui huge button" id="filter-again-button">Filter again</div>
+      </div>
+      <!-- FILTER AGAIN BUTTON -->
+      <!----------------------------- filter button  -------------------------->
     </div>
-          <!-- UI SEGMENT COLUMN 1 END -->
+    <!--UI SEGMENT COLUMN 1 END -->
   </div>
-        <!-- UI SEGMENT COLUMN 2 START -->
-        <div class="column">
-          <div class="ui segment column" id="map-column">
-            <div class="container" id="map-container">
-              <img id="map-container-image" src="/assets/map-shot.png">
-            </div>
-          </div>
-
-
-
-        <div *ngFor="let result of displaySearchResults">RESULTS City: {{result.name}}, Temp: {{result.avgCelcius}}, Humidity: {{result.avgHumidity}}</div>        
-
-        </div>
-        <!-- UI SEGMENT COLUMN 2 END -->
-
-
-
-
+  <!-- STACKABLE COLUMN END -->
+  <!----------------------------- map column  -------------------------->
+  <!-- UI SEGMENT COLUMN 2 START -->
+  <div class="column">
+    <div class="ui segment column" id="map-column">
+      <div class="container" id="map-container">
+        <img id="map-container-image" src="/assets/map-shot.png">
+      </div>
+    </div>
+  </div>
+  <!-- UI SEGMENT COLUMN 2 END -->
+  <!----------------------------- map column  -------------------------->
 </div>
-
+<!-- ROW END -->

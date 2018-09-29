@@ -5,27 +5,24 @@ import { BehaviorSubject } from "rxjs";
 export class DataService {
 
 
-  private searchResultSource = new BehaviorSubject<string>("default");
-
-   private messageSource = new BehaviorSubject<string>('default message');
-
+  private searchResultSource = new BehaviorSubject<any>();
+  private searchQuerySource = new BehaviorSubject<any>("default query");
 
   //current message variable used by components
 
-  currentMessage = this.messageSource.asObservable();
-
   searchResultMessage = this.searchResultSource.asObservable();
+  searchQueryMessage = this.searchQuerySource.asObservable();
 
   constructor() { }
 
   //changes currentMessage's current value
 
-  changeMessage(message: string) {
-    this.messageSource.next(message)
-  }
-
   changeSearchResultMessage(searchResult: any) {
     this.searchResultSource.next(searchResult);
+  }
+
+  changeSearchQueryMessage(searchQuery: any) {
+    this.searchQuerySource.next(searchQuery);
   }
 
 }
