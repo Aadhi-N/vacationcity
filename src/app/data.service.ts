@@ -5,7 +5,7 @@ import { BehaviorSubject } from "rxjs";
 export class DataService {
 
 
-  private searchResultSource = new BehaviorSubject<any>();
+  private searchResultSource = new BehaviorSubject<any>("");
   private searchQuerySource = new BehaviorSubject<any>("default query");
 
   //current message variable used by components

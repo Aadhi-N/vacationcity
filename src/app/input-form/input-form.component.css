@@ -8,11 +8,12 @@
 }
 
 #select-month-row {
-  margin: 70px;
+  margin-top: 70px;
 }
 
 #select-month {
   font-weight: bold;
+  margin-right: 20px;
 }
 
 #select-temp {
@@ -80,8 +81,13 @@
   top: 6px;
 }
 
+.showError {
+  display: none;
+  background: none #eaeaea!important
+}
+
 .slider {
-  margin: 50px;
+  margin: 50px 0px 20px 0px;
 }
 
 

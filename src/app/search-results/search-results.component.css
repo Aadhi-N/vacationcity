@@ -101,10 +101,6 @@
 	top: 6px;
 }
 
-
-
-
-
 .ui .statistic>.value {
 	font-size: 2.5rem!important;
 	text-align: left;
@@ -112,7 +108,7 @@
 }
 
 .ui.cards~.ui.cards {
-	margin-top: 0.9em;
+	margin-top: -0.9em;
 }
 
 hr {

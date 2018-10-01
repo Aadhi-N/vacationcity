@@ -32,6 +32,7 @@ export class InputFormComponent implements OnInit {
   humidity: Humidity[];
 
   selectedMonth: number;
+  selectedMonthName: string;
   selectedTemp: number;
   selectedHumidity: number;
   submitData: any[];
@@ -40,6 +41,7 @@ export class InputFormComponent implements OnInit {
 
   celciusActive = true;
   farenheitActive = true;
+  emptyValueHumidity = true;
 
   filteredSearchResults: any;
   displaySearchResults: any;
@@ -109,15 +111,23 @@ export class InputFormComponent implements OnInit {
 
 
   onMonthClick(event): void {
-    (this.selectedMonth == undefined) ? this.selectedMonth = 1 : this.selectedMonth = Number(event.target.value); 
+    // (this.selectedMonth == undefined) ? console.log('onclick, nothing') : 
+
+    this.selectedMonth = Number(event.target.value); 
+    
+    this.selectedMonthName = this.months[event.target.value -1].name;
   }
 
   tempSlider(event): void {
-    (!event) ? this.selectedTemp = 0 : this.selectedTemp = event;
+    // (!event) ? this.selectedTemp = "0" : 
+
+    this.selectedTemp = event;
   }
 
   humiditySlider(event): void {
-    (!event) ? this.selectedHumidity = 50 : this.selectedHumidity = event;
+    // (!event) ? this.selectedHumidity = 50 : 
+
+    this.selectedHumidity = event;
   }
 
   setMetric(event) {
@@ -127,10 +137,20 @@ export class InputFormComponent implements OnInit {
   }
 
   displayQuery() {
-    this.data.changeSearchQueryMessage([{monthQuery: this.selectedMonth, tempQuery: this.selectedTemp, humidityQuery: this.selectedHumidity}])
+    this.data.changeSearchQueryMessage([{monthQuery: this.selectedMonthName, tempQuery: this.selectedTemp, humidityQuery: this.selectedHumidity}])
   }
 
   displayResults() {
+    if (this.selectedMonth == undefined) {
+      console.log('no month')
+
+    }
+    if (this.selectedTemp == undefined) {console.log('no temp')}
+
+      if (this.selectedHumidity == undefined) {
+        console.log('no humidity')
+        this.emptyValueHumidity = false;
+      }
     this.data.changeSearchResultMessage(this.displaySearchResults)
   }
 
@@ -163,5 +183,6 @@ export class InputFormComponent implements OnInit {
       this.filteredSearchResults = cityResults
       this.displaySearchResults = this.filteredSearchResults
   }
+
 }
 

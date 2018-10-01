@@ -37,8 +37,4 @@ export class SearchResultsComponent implements OnInit {
   showResults() {
     console.log("keep showing");
   }
-
-  newMessage() {
-    this.data.changeMessage("Hello from Sibling");
-  }
 }
