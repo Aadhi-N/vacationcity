@@ -8,39 +8,49 @@ declare var $: any;
   styleUrls: ["./search-results.component.css"]
 })
 export class SearchResultsComponent implements OnInit {
-
+  /* FROM PARENT - HIDE COMPONENT UNTIL SUBMIT BUTTON CLICKED */
   @Input() resultsHidden: string;
 
   displaySearchResults: any;
   displaySearchQuery: any;
-  isResultsAvailable = false;
+  isResultsAvailable = true;
 
   constructor(private data: DataService) {}
 
   ngOnInit() {
-
     this.specialCards(event);
-    this.data.searchResultMessage.subscribe(searchResult => {
-       if (!Array.isArray(searchResult) || !searchResult.length) {
-          console.log('empty array'); 
-          this.isResultsAvailable = true;
-        } else {
-          this.displaySearchResults = searchResult; console.log('search results', searchResult)
-        }
 
+    this.data.searchResultMessage.subscribe(searchResult => {
+      this.displaySearchResults = searchResult;
+      this.validateResults();
     });
 
-    this.data.searchQueryMessage.subscribe(searchQuery => this.displaySearchQuery = searchQuery);
-
+    this.data.searchQueryMessage.subscribe(
+      searchQuery => (this.displaySearchQuery = searchQuery)
+    );
   }
 
   ngAfterViewInit() {}
 
+  validateResults() {
+    if (
+      !Array.isArray(this.displaySearchResults) ||
+      !this.displaySearchResults.length
+    ) {
+      this.isResultsAvailable = false;
+    } else {
+      this.isResultsAvailable = true;
+    }
+  }
+
+  clearSearch() {
+    this.displaySearchResults = null;
+  }
+
+  /* SEMANTIC UI - DIMS CARD IMAGE ON HOVER */
   specialCards(event) {
     $(".special.cards .image").dimmer({
       on: "hover"
     });
   }
-
-  
 }
