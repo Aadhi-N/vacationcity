@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Input } from "@angular/core";
 import { DataService } from "../data.service";
 declare var $: any;
 
@@ -8,18 +8,19 @@ declare var $: any;
   styleUrls: ["./search-results.component.css"]
 })
 export class SearchResultsComponent implements OnInit {
+
+  @Input() resultsHidden: string;
+
   displaySearchResults: any;
   displaySearchQuery: any;
 
   constructor(private data: DataService) {}
 
   ngOnInit() {
+
     this.specialCards(event);
-
-    this.showResults();
-
     this.data.searchResultMessage.subscribe(searchResult => {
-      this.displaySearchResults = searchResult;
+      this.displaySearchResults = searchResult; console.log('search results', searchResult)
     });
 
     this.data.searchQueryMessage.subscribe(searchQuery => this.displaySearchQuery = searchQuery);
@@ -34,7 +35,5 @@ export class SearchResultsComponent implements OnInit {
     });
   }
 
-  showResults() {
-    console.log("keep showing");
-  }
+  
 }

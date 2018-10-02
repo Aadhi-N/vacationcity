@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { DataService } from "../data.service";
 import { NgForm } from "@angular/forms";
 
@@ -25,6 +25,11 @@ import { HumidityService } from "../humidity.service";
   styleUrls: ['./input-form.component.css']
 })
 export class InputFormComponent implements OnInit {
+
+  @Input() formHidden: string;
+
+  submitClicked = false;
+
   months: Month[];
   cities: City[];
   cityTemps: CityTemp[];
@@ -41,7 +46,9 @@ export class InputFormComponent implements OnInit {
 
   celciusActive = true;
   farenheitActive = true;
-  emptyValueHumidity = true;
+  isMonthValue = true;
+  isTempValue = true;
+  isHumidityValue = true;
 
   filteredSearchResults: any;
   displaySearchResults: any;
@@ -116,18 +123,21 @@ export class InputFormComponent implements OnInit {
     this.selectedMonth = Number(event.target.value); 
     
     this.selectedMonthName = this.months[event.target.value -1].name;
+    this.isMonthValue = true;
   }
 
   tempSlider(event): void {
     // (!event) ? this.selectedTemp = "0" : 
 
     this.selectedTemp = event;
+    this.isTempValue = true;
   }
 
   humiditySlider(event): void {
-    // (!event) ? this.selectedHumidity = 50 : 
+    // (!event) ? this.selectedHumidity = 55 : 
 
     this.selectedHumidity = event;
+    this.isHumidityValue = true;
   }
 
   setMetric(event) {
@@ -143,15 +153,21 @@ export class InputFormComponent implements OnInit {
   displayResults() {
     if (this.selectedMonth == undefined) {
       console.log('no month')
+      this.isMonthValue = false;
 
     }
-    if (this.selectedTemp == undefined) {console.log('no temp')}
+    if (this.selectedTemp == undefined) {
+      console.log('no temp');
+      this.isTempValue = false;
+    }
 
-      if (this.selectedHumidity == undefined) {
-        console.log('no humidity')
-        this.emptyValueHumidity = false;
-      }
+    if (this.selectedHumidity === undefined) {
+      console.log('no humidity')
+      this.isHumidityValue = false;
+    } 
+
     this.data.changeSearchResultMessage(this.displaySearchResults)
+  
   }
 
   showData() {
@@ -182,6 +198,10 @@ export class InputFormComponent implements OnInit {
       // ASSIGN PROPERTY TO MESSAGE SERVICE 
       this.filteredSearchResults = cityResults
       this.displaySearchResults = this.filteredSearchResults
+  }
+
+  submit() {
+    this.submitClicked = true;
   }
 
 }

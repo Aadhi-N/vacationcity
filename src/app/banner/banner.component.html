@@ -13,11 +13,12 @@
     </div>
     <div class="row" id="start-button-row">
       <div class="two wide column">
-        <div class="ui huge button" id="start-button">Get Started <i class="down angle icon" id="down-arrow"></i></div>
+        <div class="ui huge button" id="start-button" (click)="getStarted()">Get Started <i class="down angle icon" id="down-arrow"></i></div>
         <span class="dot"></span>
       </div>
     </div>
   </div>
+    <app-input-form [formHidden]="getStartedClicked"></app-input-form>
 </div>
 
 

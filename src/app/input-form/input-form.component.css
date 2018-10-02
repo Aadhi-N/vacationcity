@@ -1,3 +1,7 @@
+.formComponent {
+  display: none;
+}
+
 #input-form {
   text-align: center;
   background-image: linear-gradient(to bottom right, #8cd98c, #339933);
@@ -83,12 +87,13 @@
 
 .showError {
   display: none;
-  background: none #eaeaea!important
+  background: none #eaeaea!important;
 }
 
 .slider {
   margin: 50px 0px 20px 0px;
 }
+
 
 
 /*Apply styling that will override basic appearance*/
