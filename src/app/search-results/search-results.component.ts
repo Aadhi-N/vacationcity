@@ -13,6 +13,7 @@ export class SearchResultsComponent implements OnInit {
 
   displaySearchResults: any;
   displaySearchQuery: any;
+  isResultsAvailable = false;
 
   constructor(private data: DataService) {}
 
@@ -20,7 +21,13 @@ export class SearchResultsComponent implements OnInit {
 
     this.specialCards(event);
     this.data.searchResultMessage.subscribe(searchResult => {
-      this.displaySearchResults = searchResult; console.log('search results', searchResult)
+       if (!Array.isArray(searchResult) || !searchResult.length) {
+          console.log('empty array'); 
+          this.isResultsAvailable = true;
+        } else {
+          this.displaySearchResults = searchResult; console.log('search results', searchResult)
+        }
+
     });
 
     this.data.searchQueryMessage.subscribe(searchQuery => this.displaySearchQuery = searchQuery);

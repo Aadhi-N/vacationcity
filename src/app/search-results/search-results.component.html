@@ -1,4 +1,4 @@
-<div [class.searchComponent]="!resultsHidden">
+<div [class.searchComponent]="resultsHiddenplaceholder">
   <div class="row" id="search-results">
     <!-- ROW START -->
     <div class="ui huge header" id="search-message-title">Destinations that suit my weather preference:</div>
@@ -6,8 +6,13 @@
       <!-- STACKABLE COLUMN START -->
       <div class="ui segment column" id="tile-column">
         <!--UI SEGMENT COLUMN 1 START -->
+        
+
         <div class="ui header" id="search-message-result" *ngFor="let q of displaySearchQuery">Cities with "<em>{{q.tempQuery}} degrees Celcius</em>" with "<em>{{q.humidityQuery}}%</em>" humidity in the month of "<em>{{q.monthQuery}}</em>":
         </div>
+
+        <div [class.noResultMessage]="isResultsAvailable">No results available</div>
+
         <!----------------------------- tile grid  -------------------------->
         <div class="ui four cards">
           <!-- FOUR CARDS START -->

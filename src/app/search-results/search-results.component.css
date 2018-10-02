@@ -2,6 +2,10 @@
 	display: none;
 }
 
+.noResultMessage {
+	display: none;
+}
+
 #search-results {
 	background-image: linear-gradient(to top left, #fad25da3, #fbbd08);
 }
