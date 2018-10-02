@@ -14,6 +14,7 @@ import { MessagesComponent } from './messages/messages.component';
 import { InputFormComponent } from './input-form/input-form.component';
 import { SearchResultsComponent } from './search-results/search-results.component';
 import { FooterComponent } from './footer/footer.component';
+import { MapComponent } from './map/map.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { FooterComponent } from './footer/footer.component';
     MessagesComponent,
     InputFormComponent,
     SearchResultsComponent,
-    FooterComponent
+    FooterComponent,
+    MapComponent
   ],
   imports: [
     BrowserModule,
