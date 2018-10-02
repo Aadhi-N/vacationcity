@@ -138,7 +138,7 @@ export class InputFormComponent implements OnInit {
     this.isHumidityValue = true;
   }
 
-  setMetric(event) {
+  setMetric(event) { 
     this.celciusActive = !this.celciusActive;
     this.farenheitActive = !this.farenheitActive;
     this.farenheitActive ? (this.selectedTemp = 32) : (this.selectedTemp = 0);
