@@ -215,8 +215,9 @@ export class InputFormComponent implements OnInit {
         name: this.cities[filteredCity.cityId - 1].name,
         avgCelcius: filteredCity.avgCelcius,
         avgHumidity: filteredCity.avgHumidity,
-        city_coords: this.cities[filteredCity.cityId - 1].city_coords
+        coordinates: this.cities[filteredCity.cityId - 1].city_coords[0];
       });
+      // console.log('push filter', this.cities[filteredCity.cityId - 1].city_coords[0])
     }
 
     // ASSIGN PROPERTY TO MESSAGE SERVICE

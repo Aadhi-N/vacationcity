@@ -356,7 +356,7 @@ avgHumidity: 55       },
       {
         cityId: 1,
         latitude: 43.6532,
-        longitude: 79.3832
+        longitude: -79.3832
       },
        {
         cityId: 2,

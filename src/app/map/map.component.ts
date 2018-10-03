@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AgmCoreModule } from '@agm/core';
+import { DataService } from "../data.service";
+
 import { apikey } from "apikey"
 
 @Component({
@@ -8,14 +10,19 @@ import { apikey } from "apikey"
   styleUrls: ['./map.component.css']
 })
 export class MapComponent implements OnInit {
+
+  displaySearchResults: any;
+
   lat: number = 51.678418;
   lng: number = 7.809007;
   apikey: string = apikey.key;
 
-  constructor() { }
+  constructor(private data: DataService) { }
 
   ngOnInit() {
-    console.log(this.apikey)
+    this.data.searchResultMessage.subscribe(searchResult => {
+      this.displaySearchResults = searchResult;
+    });
   }
 
 }

@@ -20,16 +20,17 @@ export class SearchResultsComponent implements OnInit {
 
   ngOnInit() {
     this.specialCards(event);
-    this.getCoords();
 
     this.data.searchResultMessage.subscribe(searchResult => {
       this.displaySearchResults = searchResult;
+         console.log('display', searchResult)
       this.validateResults();
     });
 
     this.data.searchQueryMessage.subscribe(
       searchQuery => (this.displaySearchQuery = searchQuery)
     );
+
   }
 
   validateResults() {
@@ -41,12 +42,6 @@ export class SearchResultsComponent implements OnInit {
     } else {
       this.isResultsAvailable = true;
     }
-  }
-
-  getCoords() {
-    this.displaySearchResults.filter((coords => {
-      
-    }))
   }
 
   clearSearch() {
