@@ -10,14 +10,18 @@ import { MonthService } from "../month.service";
 import { City } from "../city";
 import { CityService } from "../city.service";
 
-import { CityTemp } from "../cityTemp";
-import { CityTempService } from "../city-temp.service";
+// import { CityTemp } from "../cityTemp";
+// import { CityTempService } from "../city-temp.service";
+
+import { CityCoord } from "../cityCoord";
+import { CityCoordService } from "../city-coord.service";
 
 import { Temp } from "../temp";
 import { TempService } from "../temp.service";
 
 import { Humidity } from "../humidity";
 import { HumidityService } from "../humidity.service";
+
 
 @Component({
   selector: "app-input-form",
@@ -31,7 +35,7 @@ export class InputFormComponent implements OnInit {
 
   months: Month[];
   cities: City[];
-  cityTemps: CityTemp[];
+  // cityTemps: CityTemp[];
   temps: Temp[];
   humidity: Humidity[];
 
@@ -56,7 +60,7 @@ export class InputFormComponent implements OnInit {
   constructor(
     private monthService: MonthService,
     private cityService: CityService,
-    private cityTempService: CityTempService,
+    // private cityTempService: CityTempService,
     private tempService: TempService,
     private humidityService: HumidityService,
     private data: DataService
@@ -65,7 +69,7 @@ export class InputFormComponent implements OnInit {
   ngOnInit() {
     this.getMonths();
     this.getCities();
-    this.getCityTemps();
+    // this.getCityTemps();
     this.getTemps();
     this.getHumidity();
     this.onMonthClick(event);
@@ -98,17 +102,26 @@ export class InputFormComponent implements OnInit {
             return cityData;
           }
         });
+
         city.city_temp = cityArray;
+
+        let coordArray = cities[2].filter(coords => {
+          if (city.id == coords.cityId){
+            return coords;
+          }
+        });
+
+        city.city_coords = coordArray;
       }
       this.cities = cities[0];
     });
   }
 
-  getCityTemps(): void {
-    this.cityTempService.getCityTemps().subscribe(cityTemps => {
-      this.cityTemps = cityTemps;
-    });
-  }
+  // getCityTemps(): void {
+  //   this.cityTempService.getCityTemps().subscribe(cityTemps => {
+  //     this.cityTemps = cityTemps;
+  //   });
+  // }
 
   getTemps(): void {
     this.tempService.getTemps().subscribe(temps => {
@@ -201,7 +214,8 @@ export class InputFormComponent implements OnInit {
       cityResults.push({
         name: this.cities[filteredCity.cityId - 1].name,
         avgCelcius: filteredCity.avgCelcius,
-        avgHumidity: filteredCity.avgHumidity
+        avgHumidity: filteredCity.avgHumidity,
+        city_coords: this.cities[filteredCity.cityId - 1].city_coords
       });
     }
 

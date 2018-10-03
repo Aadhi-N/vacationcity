@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-// import { } from "@types/googlemaps";
+import { AgmCoreModule } from '@agm/core';
+import { apikey } from "apikey"
 
 @Component({
   selector: 'app-map',
@@ -7,20 +8,14 @@ import { Component, OnInit, ViewChild } from '@angular/core';
   styleUrls: ['./map.component.css']
 })
 export class MapComponent implements OnInit {
-
-  // @ViewChild('gmap') gmapElement: any;
-  // map: google.maps.Map;
+  lat: number = 51.678418;
+  lng: number = 7.809007;
+  apikey: string = apikey.key;
 
   constructor() { }
 
   ngOnInit() {
-  //   var mapProp = {
-  //     center: new google.maps.LatLng(18.5793, 73.8143),
-  //     zoom: 15,
-  //     mapTypeId: google.maps.MapTypeId.ROADMAP
-  //   };
-
-  //   this.map = new google.maps.Map(this.gmapElement.nativeElement, mapProp);
+    console.log(this.apikey)
   }
 
 }

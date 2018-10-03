@@ -1,4 +1,4 @@
-<div [class.searchComponent]="resultsHidden">
+<div [class.searchComponent]="resultsHiddenplaceholder">
   <div class="row" id="search-results">
     <!-- ROW START -->
     <div class="ui huge header" id="search-message-title">Destinations that suit my weather preference:</div>
@@ -13,6 +13,7 @@
         <div class="ui four cards">
           <!-- FOUR CARDS START -->
           <div class="ui special cards" id="special-cards" (click)="specialCards()" *ngFor="let result of displaySearchResults">
+
             <!--UI SPECIAL CARDS START -->
             <div class="card" id="single-tiles">
               <!-- SINGLE TILE START -->
@@ -29,6 +30,7 @@
               <div class="content">
                 <!-- TILE CONTENT START -->
                 <div class="header">Avg. Temperature: </div>
+
                 <div class="row" id="statistic-row">
                   <!-- TILE STATISTICS START-->
                   <div class="ui horizontal statistic">
@@ -105,20 +107,19 @@
         <!----------------------------- filter button  -------------------------->
       </div>
       <!--UI SEGMENT COLUMN 1 END -->
+      <!----------------------------- map column  -------------------------->
+      <!-- UI SEGMENT COLUMN 2 START -->
+      <div class="column">
+        <div class="ui segment column" id="map-column">
+          <div class="container" id="map-container">
+            <app-map></app-map>
+          </div>
+        </div>
+      </div>
+        <!-- UI SEGMENT COLUMN 2 END -->
+        <!----------------------------- map column  -------------------------->
     </div>
     <!-- STACKABLE COLUMN END -->
-    <!----------------------------- map column  -------------------------->
-    <!-- UI SEGMENT COLUMN 2 START -->
-    <!-- <div class="column">
-      <div class="ui segment column" id="map-column">
-        <div class="container" id="map-container">
-          <img id="map-container-image" src="/assets/map-shot.png">
-      </div>
-        </div>
-      </div> -->
-      <!-- UI SEGMENT COLUMN 2 END -->
-      <!----------------------------- map column  -------------------------->
       {{resultsHidden}}
-    </div><!-- ROW END -->
-  <app-map></app-map>
-  </div><!-- COMPONENT END -->
+  </div><!-- ROW END -->
+</div><!-- COMPONENT END -->

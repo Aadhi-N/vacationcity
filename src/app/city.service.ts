@@ -7,6 +7,7 @@ import { Observable, of } from "rxjs";
 import { forkJoin } from "rxjs";
 import { City } from "./city";
 import { CityTemp } from "./cityTemp";
+import { CityCoord } from "./cityCoord";
 
 
 @Injectable({
@@ -15,6 +16,8 @@ import { CityTemp } from "./cityTemp";
 export class CityService {
   private citiesUrl = "api/cities";
   private cityTempsUrl = "api/cityTemps";
+  private cityCoordsUrl = "api/cityCoords";
+
  
   constructor(
     private http: HttpClient,
@@ -26,9 +29,10 @@ export class CityService {
   }
 
   getCities(): Observable<any[]>{
-    let cityData = this.http.get(this.citiesUrl)
-    let cityTempData = this.http.get(this.cityTempsUrl)
-      return forkJoin([cityData, cityTempData])
+    let cityData = this.http.get(this.citiesUrl);
+    let cityTempData = this.http.get(this.cityTempsUrl);
+    let cityCoordData = this.http.get(this.cityCoordsUrl);
+      return forkJoin([cityData, cityTempData, cityCoordData])
       .pipe(
           tap(cities => this.log("fetched cities")),
           catchError(this.handleError("getCities", []))

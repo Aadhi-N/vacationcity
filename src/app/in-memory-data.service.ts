@@ -40,22 +40,26 @@ export class InMemoryDataService implements InMemoryDbService {
       {
         id: 1,
         name: "Toronto",
-        city_temp: ""
+        city_temp: "",
+        city_coords: ""
       },
       {
         id: 2,
         name: "Tokyo",
-        city_temp: ""
+        city_temp: "",
+        city_coords: ""
       },
       {
         id: 3,
         name: "Los Angeles",
-        city_temp: ""
+        city_temp: "",
+        city_coords: ""
       },
       {
         id: 4,
         name: "Alyeska",
-        city_temp: ""
+        city_temp: "",
+        city_coords: ""
       }
     ];
 
@@ -347,6 +351,31 @@ avgHumidity: 55       },
         avgHumidity: 79
       }
     ];
-    return { months, temps, humidity, cities, cityTemps };
+
+    const cityCoords = [
+      {
+        cityId: 1,
+        latitude: 43.6532,
+        longitude: 79.3832
+      },
+       {
+        cityId: 2,
+        latitude: 35.6895,
+        longitude: 139.6917
+      },
+       {
+        cityId: 3,
+        latitude: 34.0522,
+        longitude: 118.2437
+      },
+       {
+        cityId: 4,
+        latitude: 60.9608,
+        longitude: -149.1108
+      }
+    ];
+
+
+    return { months, temps, humidity, cities, cityTemps, cityCoords };
   }
 }

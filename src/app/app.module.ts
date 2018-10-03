@@ -16,6 +16,10 @@ import { SearchResultsComponent } from './search-results/search-results.componen
 import { FooterComponent } from './footer/footer.component';
 import { MapComponent } from './map/map.component';
 
+import { AgmCoreModule } from '@agm/core';
+
+import { apikey } from "apikey";
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,7 +37,10 @@ import { MapComponent } from './map/map.component';
     HttpClientModule,
     HttpClientInMemoryWebApiModule.forRoot(
       InMemoryDataService, { dataEncapsulation: false }
-      )
+      ),
+    AgmCoreModule.forRoot({
+      apiKey: apikey.key
+    })
     
   ],
   providers: [],

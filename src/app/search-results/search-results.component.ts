@@ -12,6 +12,7 @@ export class SearchResultsComponent implements OnInit {
   @Input() resultsHidden: string;
 
   displaySearchResults: any;
+  displayCoordResults: any;
   displaySearchQuery: any;
   isResultsAvailable = true;
 
@@ -19,6 +20,7 @@ export class SearchResultsComponent implements OnInit {
 
   ngOnInit() {
     this.specialCards(event);
+    this.getCoords();
 
     this.data.searchResultMessage.subscribe(searchResult => {
       this.displaySearchResults = searchResult;
@@ -30,8 +32,6 @@ export class SearchResultsComponent implements OnInit {
     );
   }
 
-  ngAfterViewInit() {}
-
   validateResults() {
     if (
       !Array.isArray(this.displaySearchResults) ||
@@ -41,6 +41,12 @@ export class SearchResultsComponent implements OnInit {
     } else {
       this.isResultsAvailable = true;
     }
+  }
+
+  getCoords() {
+    this.displaySearchResults.filter((coords => {
+      
+    }))
   }
 
   clearSearch() {
