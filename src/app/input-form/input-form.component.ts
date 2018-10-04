@@ -215,7 +215,7 @@ export class InputFormComponent implements OnInit {
         name: this.cities[filteredCity.cityId - 1].name,
         avgCelcius: filteredCity.avgCelcius,
         avgHumidity: filteredCity.avgHumidity,
-        coordinates: this.cities[filteredCity.cityId - 1].city_coords[0];
+        coordinates: this.cities[filteredCity.cityId - 1].city_coords[0]
       });
       // console.log('push filter', this.cities[filteredCity.cityId - 1].city_coords[0])
     }
