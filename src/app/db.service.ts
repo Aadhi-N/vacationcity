@@ -4,41 +4,31 @@ import { catchError, map, tap } from "rxjs/operators";
 
 import { MessageService } from "./message.service";
 import { Observable, of } from "rxjs";
-import { forkJoin } from "rxjs";
-import { City } from "./city";
-import { CityTemp } from "./cityTemp";
-import { CityCoord } from "./cityCoord";
 
-
+import { HerokuDatabase } from "./db"; 
 
 @Injectable({
   providedIn: 'root'
 })
-export class CityService {
-  private citiesUrl = "api/cities";
-  private cityTempsUrl = "api/cityTemps";
-  private cityCoordsUrl = "api/cityCoords";
+export class HerokuDatabaseService {
+  private dbUrl = "api/db";
 
   constructor(
     private http: HttpClient,
-    private messageService: MessageService
-  ) { }
+    private messageService: MessageService) { }
 
   private log(message: string) {
-    this.messageService.add(`CityService: ${message}`);
+    this.messageService.add(`HerokuDatabaseService: ${message}`);
   }
 
-  getCities(): Observable<any[]>{
-    let cityData = this.http.get(this.citiesUrl);
-    let cityTempData = this.http.get(this.cityTempsUrl);
-    let cityCoordData = this.http.get(this.cityCoordsUrl);
-      return forkJoin([cityData, cityTempData, cityCoordData])
+  getHerokuData(): Observable<HerokuDatabase[]>{
+    return this.http
+      .get<HerokuDatabase[]>(this.dbUrl)
       .pipe(
-          tap(cities => this.log("fetched cities")),
-          catchError(this.handleError("getCities", []))
+        tap(herokuData => this.log("fetched herokuData")),
+        catchError(this.handleError("getHerokuData", []))
       );
   }
-
 
   private handleError<T>(operation = "operation", result?: T) {
     return (error: any): Observable<T> => {
@@ -52,5 +42,4 @@ export class CityService {
       return of(result as T);
     };
   }
-
 }

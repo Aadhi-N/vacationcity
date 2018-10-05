@@ -17,6 +17,7 @@ import { FooterComponent } from './footer/footer.component';
 import { MapComponent } from './map/map.component';
 
 import { AgmCoreModule } from '@agm/core';
+import { TestDataComponent } from './test-data/test-data.component';
 
 // import { apikey } from './apikey';
 
@@ -29,7 +30,8 @@ import { AgmCoreModule } from '@agm/core';
     InputFormComponent,
     SearchResultsComponent,
     FooterComponent,
-    MapComponent
+    MapComponent,
+    TestDataComponent
   ],
   imports: [
     BrowserModule,
