@@ -11,7 +11,7 @@ import { HerokuDatabase } from "./db";
   providedIn: 'root'
 })
 export class HerokuDatabaseService {
-  private dbUrl = "https://vacationcity.herokuapp.com/api/db";
+  private dbUrl = "/api/db";
 
   constructor(
     private http: HttpClient,
