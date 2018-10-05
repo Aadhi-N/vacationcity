@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { AgmCoreModule } from '@agm/core';
 import { DataService } from "../data.service";
 
-import { apikey } from "../apikey"
+// import { apikey } from "../apikey"
 
 @Component({
   selector: 'app-map',
@@ -15,7 +15,7 @@ export class MapComponent implements OnInit {
 
   lat: number = 51.678418;
   lng: number = 7.809007;
-  apikey: string = apikey.key;
+  // apikey: string = apikey.key;
 
   constructor(private data: DataService) { }
 
