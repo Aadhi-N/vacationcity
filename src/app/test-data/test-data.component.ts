@@ -20,7 +20,7 @@ export class TestDataComponent implements OnInit {
 
   getHerokuData() {
     this.herokuDatabaseService.getHerokuData().subscribe(herokuData => {
-      this.herokuData = herokuData;
+      this.herokuData = herokuData[0];
       console.log('herokuData', herokuData);
     })
   }
