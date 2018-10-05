@@ -5,8 +5,7 @@ import { BannerComponent } from "./banner/banner.component";
 
 const routes: Routes = [
   { path: '', redirectTo: '/banner', pathMatch: 'full' },
-  { path: 'banner', component: BannerComponent },
-  
+  { path: 'banner', component: BannerComponent },  
 ];
 
 @NgModule({

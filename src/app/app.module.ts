@@ -18,6 +18,8 @@ import { MapComponent } from './map/map.component';
 
 import { AgmCoreModule } from '@agm/core';
 
+import { apikey } from './apikey';
+
 
 @NgModule({
   declarations: [
@@ -38,7 +40,7 @@ import { AgmCoreModule } from '@agm/core';
       InMemoryDataService, { dataEncapsulation: false }
       ),
     AgmCoreModule.forRoot({
-      // apiKey: apikey.key
+      apiKey: apikey.key
     })
     
   ],

@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { AgmCoreModule } from '@agm/core';
 import { DataService } from "../data.service";
 
-import { apikey } from "apikey"
+import { apikey } from "../apikey"
 
 @Component({
   selector: 'app-map',
