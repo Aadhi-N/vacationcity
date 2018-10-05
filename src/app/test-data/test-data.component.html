@@ -1,2 +1,4 @@
 <h1>Data from heroku database: </h1>
-<h2 *ngFor="let data of herokuData">{{data.id}}--{{data.name}}</h2>
+<ul *ngFor="let data of herokuData">
+  <li>{{data.id}}--{{data.name}}</li>
+</ul>
