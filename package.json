@@ -26,6 +26,7 @@
     "@angular/router": "^6.1.0",
     "angular-in-memory-web-api": "^0.6.1",
     "core-js": "^2.5.4",
+    "csv-stringify": "^4.3.1",
     "express": "^4.16.3",
     "gulp": "^3.9.1",
     "gulp-cli": "^2.0.1",

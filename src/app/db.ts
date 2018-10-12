@@ -1,5 +1,7 @@
 
 export class HerokuDatabase {
-  id: number;
-  name: string;
+  cityID: number;
+  cityName: string;
+  city_temp: number;
+  city_coords: number;
 } 

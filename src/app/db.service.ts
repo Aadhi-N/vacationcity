@@ -25,7 +25,7 @@ export class HerokuDatabaseService {
     return this.http
       .get<HerokuDatabase[]>(this.dbUrl)
       .pipe(
-        tap(herokuData => this.log("fetched herokuData")),
+        tap(herokuData => {this.log("fetched herokuData"), console.log('herokuData from db:', herokuData)}),
         catchError(this.handleError("getHerokuData", []))
       );
   }
