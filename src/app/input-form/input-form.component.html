@@ -4,7 +4,7 @@
       I want to travel in
       <select name="Month" id="select-month" (click)="onMonthClick($event)">
         <option value="jd" disabled>Month</option>
-        <option *ngFor="let month of months" [value]="month.id">{{month.name}}</option>
+        <option *ngFor="let month of months" [value]="month.monthID">{{month.monthName}}</option>
       </select>
       <div class="ui left pointing red basic label" [class.showError]="isMonthValue">
         Select a month
@@ -16,10 +16,10 @@
         <span [class.farenheit]="!farenheitActive" class="farenheit" (click)="setMetric($event)">Farenheit</span>
         <br />
         <div class="slider" [class.showCelcius]="celciusActive">
-          <input *ngFor="let temp of temps" type="range" id="range" [min]="temp.range.low" [max]="temp.range.high" [value]="0" step="2" [(ngModel)]="selectedTemp" (ngModelChange)="tempSlider($event)">
+          <input *ngFor="let temp of temps" type="range" id="range" [min]="temp.low" [max]="temp.high" [value]="0" step="2" [(ngModel)]="selectedTemp" (ngModelChange)="tempSlider($event)">
         </div>
         <div class="slider" [class.showFarenheit]="!farenheitActive">
-          <input *ngFor="let temp of temps" type="range" id="range" [min]="temp.range.low-8" [max]="temp.range.high+72" [value]="32" step="2" [(ngModel)]="selectedTemp" (ngModelChange)="tempSlider($event)">
+          <input *ngFor="let temp of temps" type="range" id="range" [min]="temp.low-8" [max]="temp.high+72" [value]="32" step="2" [(ngModel)]="selectedTemp" (ngModelChange)="tempSlider($event)">
         </div>
         <div class="ui pointing red basic label" [class.showError]="isTempValue" id="error-label">
           Select a temperature
@@ -29,7 +29,7 @@
     <div class="row" id="select-humidity">
       <label>The <span id="humidity-text" data-tooltip="Humidity is the amount of water vapour in the air. The higher the relative humidity, the hotter you will feel." data-position="top center">humidity</span> should be around: <span id="amount">{{selectedHumidity}}</span> %
         <div class="slider">
-          <input *ngFor="let hum of humidity" type="range" id="range" [min]="hum.range.low" [max]="hum.range.high" step="5" [(ngModel)]="selectedHumidity" (ngModelChange)="humiditySlider($event)">
+          <input *ngFor="let hum of humidity" type="range" id="range" [min]="hum.low" [max]="hum.high" step="5" [(ngModel)]="selectedHumidity" (ngModelChange)="humiditySlider($event)">
         </div>
       </label>
       <div class="ui pointing red basic label" [class.showError]="isHumidityValue">

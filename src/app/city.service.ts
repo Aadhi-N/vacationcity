@@ -15,9 +15,13 @@ import { CityCoord } from "./cityCoord";
   providedIn: 'root'
 })
 export class CityService {
-  private citiesUrl = "api/cities";
-  private cityTempsUrl = "api/cityTemps";
-  private cityCoordsUrl = "api/cityCoords";
+  private citiesUrl = "http://localhost:8000/api/cities";
+  private cityTempsUrl = "http://localhost:8000/api/citytemps";
+  private cityCoordsUrl = "http://localhost:8000/api/citycoords";
+
+  // private citiesUrl = "api/cities";
+  // private cityTempsUrl = "api/cityTemps";
+  // private cityCoordsUrl = "api/cityCoords";
 
   constructor(
     private http: HttpClient,
@@ -27,7 +31,7 @@ export class CityService {
   private log(message: string) {
     this.messageService.add(`CityService: ${message}`);
   }
-
+  
   getCities(): Observable<any[]>{
     let cityData = this.http.get(this.citiesUrl);
     let cityTempData = this.http.get(this.cityTempsUrl);

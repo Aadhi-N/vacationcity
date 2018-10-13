@@ -21,7 +21,6 @@ export class TestDataComponent implements OnInit {
   getHerokuData() {
     this.herokuDatabaseService.getHerokuData().subscribe(herokuData => {
       this.herokuData = herokuData["results"];
-      console.log('herokuData', herokuData);
     })
   }
 

@@ -39,10 +39,10 @@ export class InputFormComponent implements OnInit {
   temps: Temp[];
   humidity: Humidity[];
 
-  selectedMonth: number;
-  selectedMonthName: string;
-  selectedTemp: number;
-  selectedHumidity: number;
+  selectedMonth: number = 1;
+  selectedMonthName: string = "January";
+  selectedTemp: number = 66;
+  selectedHumidity: number = 70;
   submitData: any[];
 
   filteredMonth: any[];
@@ -91,53 +91,50 @@ export class InputFormComponent implements OnInit {
   //DISPLAYS LIST OF MONTHS FROM DATA SOURCE
 
   getMonths(): void {
-    this.monthService.getMonths().subscribe(months => (this.months = months));
+    this.monthService.getMonths().subscribe(months => {(this.months = months.results)});
   }
+
+  // console.log('months', this.months)
 
   getCities(): void {
     this.cityService.getCities().subscribe(cities => {
-      for (let city of cities[0]) {
-        let cityArray = cities[1].filter(cityData => {
-          if (city.id == cityData.cityId) {
+      for (let city of cities[0].results) {
+        let cityArray = cities[1].results.filter(cityData => {
+          if (city.cityID == cityData.city_id) {
             return cityData;
           }
         });
 
         city.city_temp = cityArray;
 
-        let coordArray = cities[2].filter(coords => {
-          if (city.id == coords.cityId){
+        let coordArray = cities[2].results.filter(coords => {
+          if (city.cityID == coords.city_id){
             return coords;
           }
         });
 
         city.city_coords = coordArray;
       }
-      this.cities = cities[0];
+      this.cities = cities[0].results;
     });
   }
 
-  // getCityTemps(): void {
-  //   this.cityTempService.getCityTemps().subscribe(cityTemps => {
-  //     this.cityTemps = cityTemps;
-  //   });
-  // }
-
   getTemps(): void {
     this.tempService.getTemps().subscribe(temps => {
-      this.temps = temps;
+      this.temps = temps.results;
+      // console.log('getFunc', this.temps)
     });
   }
 
   getHumidity(): void {
     this.humidityService.getHumidity().subscribe(humidity => {
-      this.humidity = humidity;
+      this.humidity = humidity.results;
     });
   }
 
   onMonthClick(event): void {
-    this.selectedMonth = Number(event.target.value);
-    this.selectedMonthName = this.months[event.target.value - 1].name;
+    this.selectedMonth = event.target.value;
+    this.selectedMonthName = this.months[event.target.value - 1].monthName;
     this.isMonthValue = true;
   }
 
@@ -159,6 +156,7 @@ export class InputFormComponent implements OnInit {
 
   displaySearchParams() {
     // sending search query params to other components 
+
     this.data.changeSearchQueryMessage([
       {
         monthQuery: this.selectedMonthName,
@@ -169,10 +167,12 @@ export class InputFormComponent implements OnInit {
   }
 
   validateForm() {
-    // ternary condition that evaluates if filter options are selected; triggers error message if unselected
+    /* ternary condition that evaluates if filter options are selected; triggers error message if unselected */
+   /* COMMENTING OUT FOR DEV PURPOSES
     void (this.selectedMonth === undefined && (this.isMonthValue = false));
     void (this.selectedTemp === undefined && (this.isTempValue = false));
     void (this.selectedHumidity === undefined && (this.isHumidityValue = false));
+    */
   }
 
   displayResults() {
@@ -187,13 +187,14 @@ export class InputFormComponent implements OnInit {
     let filteredCities = [];
     let cityResults = [];
 
+
     for (let i = 0; i < this.cities.length; i++) {
       let cityTemp = this.cities[i].city_temp[this.selectedMonth - 1];
 
       if (
         !(
-          cityTemp.avgCelcius < this.selectedTemp + 10 &&
-          cityTemp.avgCelcius > this.selectedTemp - 10
+          cityTemp.avgFarenheit < this.selectedTemp + 10 &&
+          cityTemp.avgFarenheit > this.selectedTemp - 10
         )
       )
         continue;
@@ -212,16 +213,15 @@ export class InputFormComponent implements OnInit {
     // PUSH FILTERED RESULTS INTO PROPERTY
     for (let filteredCity of filteredCities) {
       cityResults.push({
-        name: this.cities[filteredCity.cityId - 1].name,
-        avgCelcius: filteredCity.avgCelcius,
+        name: this.cities[filteredCity.city_id - 1].cityName,
+        avgFarenheit: filteredCity.avgFarenheit,
         avgHumidity: filteredCity.avgHumidity,
-        coordinates: this.cities[filteredCity.cityId - 1].city_coords[0]
+        coordinates: this.cities[filteredCity.city_id - 1].city_coords[0]
       });
-      // console.log('push filter', this.cities[filteredCity.cityId - 1].city_coords[0])
     }
 
     // ASSIGN PROPERTY TO MESSAGE SERVICE
-    this.filteredSearchResults = cityResults;
+    this.filteredSearchResults = cityResults;    
     this.displaySearchResults = this.filteredSearchResults;
   }
 

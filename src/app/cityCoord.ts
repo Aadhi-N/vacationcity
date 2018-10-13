@@ -1,5 +1,6 @@
 export class CityCoord {
-  cityId: number;
+  city_id: number;
+  cityCoordsID: number;
   latitude: number;
   longitude: number;
 } 

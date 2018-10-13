@@ -13,9 +13,11 @@ export class MapComponent implements OnInit {
 
   displaySearchResults: any;
 
-  lat: number = 51.678418;
-  lng: number = 7.809007;
-  // apikey: string = apikey.key;
+  centerLat: number = 43.332987;
+  centerLng: number = 11.939059;
+  testZoom: number = 2.1;
+  previous: boolean;
+  latLngBounds;
 
   constructor(private data: DataService) { }
 
@@ -23,6 +25,21 @@ export class MapComponent implements OnInit {
     this.data.searchResultMessage.subscribe(searchResult => {
       this.displaySearchResults = searchResult;
     });
+  }
+
+  clickedMarker(infoWindow) {
+    if (this.previous) {
+      this.previous.close();
+    }
+    this.previous = infoWindow;
+  }
+
+  changeZoom(coordinates) {
+    this.testZoom = 10;
+    
+    this.centerLat = Number(coordinates.latitude);
+    this.centerLng = Number(coordinates.longtitude);
+    console.log(typeof this.latLngBounds.lat)
   }
 
 }

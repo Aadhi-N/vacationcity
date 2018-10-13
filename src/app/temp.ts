@@ -1,4 +1,5 @@
 export class Temp {
-  id: number;
-  range: number
-} 
+  tempID: number;
+  high: number;
+  low: number;
+}  

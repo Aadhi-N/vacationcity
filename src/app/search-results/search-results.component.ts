@@ -20,6 +20,7 @@ export class SearchResultsComponent implements OnInit {
 
   ngOnInit() {
     this.specialCards(event);
+    this.locateOnMaps(event);
 
     this.data.searchResultMessage.subscribe(searchResult => {
       this.displaySearchResults = searchResult;
@@ -53,5 +54,9 @@ export class SearchResultsComponent implements OnInit {
     $(".special.cards .image").dimmer({
       on: "hover"
     });
+  }
+
+  locateOnMaps(event) {
+    console.log(event)
   }
 }

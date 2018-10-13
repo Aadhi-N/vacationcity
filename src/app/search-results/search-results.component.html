@@ -12,7 +12,7 @@
         <!----------------------------- tile grid  -------------------------->
         <div class="ui four cards">
           <!-- FOUR CARDS START -->
-          <div class="ui special cards" id="special-cards" (click)="specialCards()" *ngFor="let result of displaySearchResults">
+          <div class="ui special cards" id="special-cards" (mouseover)="specialCards()" *ngFor="let result of displaySearchResults">
 
             <!--UI SPECIAL CARDS START -->
             <div class="card" id="single-tiles">
@@ -20,13 +20,13 @@
               <div class="blurring dimmable image">
                 <!-- DIMMABLE IMAGE START -->
                 <div class="ui inverted dimmer">
-                  <div class="ui button">Locate on Maps</div>
+                  <div class="ui button" value="result.coordinates" (click)="locateOnMaps('result.coordinates')">Locate on map</div>
                 </div>
                 <img src="/assets/destination.png">
                 <div class="ui huge label" id="city-label">{{result.name}}</div>
               </div>
 
-              <div>hellooo {{result.coordinates.latitude}}, {{result.coordinates.longitude}}</div>
+              <div>hellooo {{result.coordinates.latitude}}, {{result.coordinates.longtitude}} hello</div>
 
               
               <!-- DIMMABLE IMAGE END -->
@@ -39,7 +39,7 @@
                   <!-- TILE STATISTICS START-->
                   <div class="ui horizontal statistic">
                     <div class="value">
-                      {{result.avgCelcius}}°
+                      {{result.avgFarenheit}}°
                     </div>
                     <div class="label">
                       Celcius° | Farenheit°
@@ -63,7 +63,7 @@
               <!-- TILE CONTENT END -->
               <div class="meta" id="meta-source">
                 <!-- TILE META COUNTRY START -->
-                <a>Source: Canada Weather</a>
+                <a href="https://www.timeanddate.com/">Source: © Time and Date AS </a>
               </div>
               <!-- TILE META COUNTRY END -->
               <!----------------------------- tile content  -------------------------->

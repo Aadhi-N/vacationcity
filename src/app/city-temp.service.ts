@@ -11,7 +11,8 @@ import { CityTemp } from "./cityTemp";
   providedIn: 'root'
 })
 export class CityTempService {
-  private cityTempsUrl = "api/cityTemps";
+  // private cityTempsUrl = "api/cityTemps";
+  private cityTempsUrl = "http://localhost:8000/api/citytemps";
 
   constructor(private http: HttpClient,
     private messageService: MessageService

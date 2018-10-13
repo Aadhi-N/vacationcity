@@ -1,4 +1,5 @@
 export class Humidity {
-  id: number;
-  range: number;
+  humidityID: number;
+  high: number;
+  low: number;
 } 

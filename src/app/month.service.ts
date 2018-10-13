@@ -10,7 +10,8 @@ import { Month } from "./month";
   providedIn: "root"
 })
 export class MonthService {
-  private monthsUrl = "api/months";
+  // private monthsUrl = "api/months";
+  private monthsUrl = "http://localhost:8000/api/months";
 
   constructor(
     private http: HttpClient,

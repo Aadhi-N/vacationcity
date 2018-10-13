@@ -43,3 +43,9 @@ Thumbs.db
 
 # weather data dump file
 ./weather_data.dump
+
+#express server
+./server.js
+
+#pg database keys
+pgkeys.js

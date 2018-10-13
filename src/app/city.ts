@@ -1,7 +1,7 @@
 
 export class City {
-	id: number;
-	name: string;
-  city_temp: any;
-  city_coords: any;
+	cityID: number;
+  cityName: string;
+  city_temp: string;
+  city_coords: string;
 } 

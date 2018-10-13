@@ -1,4 +1,4 @@
 export class Month {
-	id: number;
-	name: string;
+	monthID: number;
+  monthName: string;
 }

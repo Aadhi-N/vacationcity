@@ -1,6 +1,7 @@
 export class CityTemp {
-  cityId: number;
-  monthId: number;
-  avgCelcius: number;
-  avgHumidity: number
+  cityTempsID: number;
+  city_id: number;
+  month_id: number;
+  avgFarenheit: number;
+  avgHumidity: number;
 } 
