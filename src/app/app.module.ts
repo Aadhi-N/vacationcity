@@ -7,6 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 // import { InMemoryDataService } from "./in-memory-data.service";
 
 import { AppRoutingModule } from './app-routing.module';
+import {NgxPaginationModule} from 'ngx-pagination'; // <-- import the module
 
 import { AppComponent } from './app.component';
 import { BannerComponent } from './banner/banner.component';
@@ -43,8 +44,8 @@ import { apikey } from './apikey';
     //   ),
     AgmCoreModule.forRoot({
       apiKey: apikey.key
-    })
-    
+    }),
+    NgxPaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent]

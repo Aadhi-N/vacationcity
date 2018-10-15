@@ -10,9 +10,6 @@ import { MonthService } from "../month.service";
 import { City } from "../city";
 import { CityService } from "../city.service";
 
-// import { CityTemp } from "../cityTemp";
-// import { CityTempService } from "../city-temp.service";
-
 import { CityCoord } from "../cityCoord";
 import { CityCoordService } from "../city-coord.service";
 
@@ -35,7 +32,6 @@ export class InputFormComponent implements OnInit {
 
   months: Month[];
   cities: City[];
-  // cityTemps: CityTemp[];
   temps: Temp[];
   humidity: Humidity[];
 
@@ -47,8 +43,8 @@ export class InputFormComponent implements OnInit {
 
   filteredMonth: any[];
 
-  celciusActive = true;
-  farenheitActive = true;
+  celciusActive: boolean;
+  farenheitActive: boolean;
   isMonthValue = true;
   isTempValue = true;
   isHumidityValue = true;
@@ -75,7 +71,7 @@ export class InputFormComponent implements OnInit {
     this.onMonthClick(event);
     this.setMetric(event);
     this.humiditySlider(event);
-    this.tempSlider(event);
+    // this.tempSlider(event);
   }
 
   ngAfterViewInit() {
@@ -138,9 +134,29 @@ export class InputFormComponent implements OnInit {
     this.isMonthValue = true;
   }
 
-  tempSlider(event): void {
-    this.selectedTemp = event;
+  tempSlider(event) {
+    if (this.celciusActive && !this.farenheitActive) {
+      console.log('celcius active')
+      this.selectedTemp = Math.round(event * 9 / 5 + 32)
+      console.log('celcius', this.selectedTemp);
+    } 
+      this.selectedTemp = event;
+    console.log('farenheit', this.selectedTemp);
+    
+
+    // if (this.farenheitActive) {
+    //   this.setFarenheit(event);
+    // }
+      
     this.isTempValue = true;
+    
+  }
+
+  setCelcius(event) {
+  }
+
+  setFarenheit(event) {
+    
   }
 
   humiditySlider(event): void {
@@ -152,6 +168,9 @@ export class InputFormComponent implements OnInit {
     this.celciusActive = !this.celciusActive;
     this.farenheitActive = !this.farenheitActive;
     this.farenheitActive ? (this.selectedTemp = 32) : (this.selectedTemp = 0);
+    // void (this.farenheitActive == true && (this.selectedTemp = 32));
+    // void (this.farenheitActive == true && (this.selectedTemp = 32));
+    console.log(this.celciusActive, this.farenheitActive)
   }
 
   displaySearchParams() {

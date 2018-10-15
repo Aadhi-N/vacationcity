@@ -75,16 +75,39 @@
   background-color: transparent;
 }
 
+.field {
+  padding: 20px;
+}
+
+.ui.checkbox input.hidden {
+  z-index: 3;
+}
+
+.ui.toggle.checkbox input:checked ~ .box:before,
+.ui.toggle.checkbox input:checked ~ label:before {
+  background-color: #b33a3a !important;
+}
+.ui.toggle.checkbox .box:before, .ui.toggle.checkbox label:before {
+    background-color: #2185d0;
+}
+
+.toggle.label {
+  cursor: pointer;
+  display: inline-block;
+  margin-right: 1em;
+}
+
 #pagination-row {
   text-align: center;
   padding: 50px;
 }
 
-#tile-pagination {
-  max-height: 20px;
+.tile-pagination {
+  background-color: grey
+ /* max-height: 20px;
   position: relative;
   margin-left: 10%;
-  margin-right: 10%;
+  margin-right: 10%;*/
 }
 
 #filter-again-button-row {

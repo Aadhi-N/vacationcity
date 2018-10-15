@@ -49,7 +49,7 @@ export class MapComponent implements OnInit {
   }
 
   changeSelectedCity(searchCityCoords) {
-    if (this.activeCity == true) {
+    if (this.activeCity) {
       this.focusZoom = 10;
       this.centerLat = searchCityCoords.lat;
       this.centerLng = searchCityCoords.lng;

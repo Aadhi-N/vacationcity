@@ -11,7 +11,7 @@ export class SearchResultsComponent implements OnInit {
   /* FROM PARENT - HIDE COMPONENT UNTIL SUBMIT BUTTON CLICKED */
   @Input() resultsHidden: string;
 
-
+  p: number = 1;
   displaySearchResults: any;
   displayCoordResults: any;
   displaySearchQuery: any;
