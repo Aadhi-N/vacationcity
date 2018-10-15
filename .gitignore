@@ -48,4 +48,4 @@ Thumbs.db
 ./server.js
 
 #pg database keys
-pgkeys.js
+pgkeys.jspgkeys.js
