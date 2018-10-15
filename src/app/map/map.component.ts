@@ -1,8 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { AgmCoreModule } from '@agm/core';
 import { DataService } from "../data.service";
-
-// import { apikey } from "../apikey"
 
 @Component({
   selector: 'app-map',
@@ -11,20 +9,30 @@ import { DataService } from "../data.service";
 })
 export class MapComponent implements OnInit {
 
-  displaySearchResults: any;
+  displaySearchResults: any = null;
+  activeCity: boolean = false;
 
   centerLat: number = 43.332987;
   centerLng: number = 11.939059;
-  testZoom: number = 2.1;
+  focusZoom: number = 2.1;
   previous: boolean;
-  latLngBounds;
+  activeCity: boolean;
 
   constructor(private data: DataService) { }
 
+  displaySelectedCityCoords: any;
+  
   ngOnInit() {
     this.data.searchResultMessage.subscribe(searchResult => {
       this.displaySearchResults = searchResult;
     });
+
+    this.data.searchCityCoordsMessage.subscribe(
+      searchCityCoords => {(
+        this.displaySelectedCityCoords = searchCityCoords); 
+        this.changeSelectedCity(this.displaySelectedCityCoords);
+        this.activeCity = true;
+      });
   }
 
   clickedMarker(infoWindow) {
@@ -35,11 +43,17 @@ export class MapComponent implements OnInit {
   }
 
   changeZoom(coordinates) {
-    this.testZoom = 10;
-    
+    this.focusZoom = 10;
     this.centerLat = Number(coordinates.latitude);
     this.centerLng = Number(coordinates.longtitude);
-    console.log(typeof this.latLngBounds.lat)
+  }
+
+  changeSelectedCity(searchCityCoords) {
+    if (this.activeCity == true) {
+      this.focusZoom = 10;
+      this.centerLat = searchCityCoords.lat;
+      this.centerLng = searchCityCoords.lng;
+    }
   }
 
 }

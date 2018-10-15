@@ -17,7 +17,7 @@ let config = {
 
 const pool = new pg.Pool(config);
 
-console.log('server start')
+console.log('server start', config)
 
 // Serve only the static files form the dist directory
 app.use(express.static(__dirname + '/dist/vacationcity'));

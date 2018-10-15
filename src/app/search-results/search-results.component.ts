@@ -11,10 +11,12 @@ export class SearchResultsComponent implements OnInit {
   /* FROM PARENT - HIDE COMPONENT UNTIL SUBMIT BUTTON CLICKED */
   @Input() resultsHidden: string;
 
+
   displaySearchResults: any;
   displayCoordResults: any;
   displaySearchQuery: any;
   isResultsAvailable = true;
+  displaySelectedCityCoords: any;
 
   constructor(private data: DataService) {}
 
@@ -24,12 +26,16 @@ export class SearchResultsComponent implements OnInit {
 
     this.data.searchResultMessage.subscribe(searchResult => {
       this.displaySearchResults = searchResult;
-         console.log('display', searchResult)
+         // console.log('display', searchResult)
       this.validateResults();
     });
 
     this.data.searchQueryMessage.subscribe(
       searchQuery => (this.displaySearchQuery = searchQuery)
+    );
+
+    this.data.searchCityCoordsMessage.subscribe(
+      searchCityCoords => {(this.displaySelectedCityCoords = searchCityCoords)}
     );
 
   }
@@ -57,6 +63,11 @@ export class SearchResultsComponent implements OnInit {
   }
 
   locateOnMaps(event) {
-    console.log(event)
+    this.data.changeCityCoordsMessage(
+      this.displaySelectedCityCoords = {
+        lat: Number(event.latitude),
+        lng: Number(event.longtitude),
+      }
+    )
   }
 }

@@ -193,16 +193,16 @@ export class InputFormComponent implements OnInit {
 
       if (
         !(
-          cityTemp.avgFarenheit < this.selectedTemp + 10 &&
-          cityTemp.avgFarenheit > this.selectedTemp - 10
+          Number(cityTemp.avgFarenheit) < this.selectedTemp + 10 &&
+          Number(cityTemp.avgFarenheit) > this.selectedTemp - 10
         )
       )
         continue;
 
       if (
         !(
-          cityTemp.avgHumidity < this.selectedHumidity + 10 &&
-          cityTemp.avgHumidity > this.selectedHumidity - 10
+          Number(cityTemp.avgHumidity) < this.selectedHumidity + 10 &&
+          Number(cityTemp.avgHumidity) > this.selectedHumidity - 10
         )
       )
         continue;
