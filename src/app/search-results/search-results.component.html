@@ -46,9 +46,38 @@
                 <div class="row" id="statistic-row">
                   <!-- TILE STATISTICS START-->
                   <div class="ui horizontal statistic">
-                    <div class="value">
-                      {{result.avgFahrenheit}}°
-                    </div>
+
+
+
+
+
+                    <ng-container *ngIf="celciusActive; then celciusValues; else fahrenheitValues"></ng-container>
+
+                    <ng-template #celciusValues> 
+                      <div class="value" >
+                      {{result.avgFahrenheit - 32 * 5 / 9 | number: '1.0-0'}}°
+                      </div>
+                    </ng-template>
+
+                    <ng-template #fahrenheitValues>
+                      <div class="value" >
+                        {{result.avgFahrenheit}}°
+                      </div>
+                    </ng-template>
+
+                   
+
+
+
+
+
+
+
+
+
+
+
+
                     <div class="label">
                       {{metric}}
                     </div>

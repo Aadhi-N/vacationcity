@@ -12,3 +12,6 @@
         <div class="slider" [class.showFarenheit]="!farenheitActive">
           <input *ngFor="let temp of temps" type="range" id="range" [min]="temp.low-8" [max]="temp.high+72" [value]="32" step="2" [(ngModel)]="selectedTemp" (ngModelChange)="tempSlider($event)">
         </div>
+
+
+Celcius° | Fahrenheit°
