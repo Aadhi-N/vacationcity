@@ -9,11 +9,11 @@
         <div class="ui header" id="search-message-result" *ngFor="let q of displaySearchQuery">Cities with "<em>{{q.tempQuery}} degrees {{q.metricQuery}}</em>" with "<em>{{q.humidityQuery}}%</em>" humidity in the month of "<em>{{q.monthQuery}}</em>":
         </div>
 
-        <div class="field">
+        <div class="field" (click)="changeMetric($event);">
           <div class="toggle label">Celcius</div>
           <div class="ui toggle checkbox">
             <input name="public" type="checkbox">
-            <label>Farenheit</label>
+            <label>Fahrenheit</label>
           </div>
         </div>
 
@@ -47,10 +47,10 @@
                   <!-- TILE STATISTICS START-->
                   <div class="ui horizontal statistic">
                     <div class="value">
-                      {{result.avgFarenheit}}°
+                      {{result.avgFahrenheit}}°
                     </div>
                     <div class="label">
-                      Celcius° | Farenheit°
+                      {{metric}}
                     </div>
                   </div>
                 </div>

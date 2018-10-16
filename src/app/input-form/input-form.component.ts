@@ -46,7 +46,7 @@ export class InputFormComponent implements OnInit {
   filteredMonth: any[];
 
   celciusActive: boolean = true;
-  farenheitActive: boolean = false;
+  fahrenheitActive: boolean = false;
   isMonthValue = true;
   isTempValue = true;
   isHumidityValue = true;
@@ -142,19 +142,19 @@ export class InputFormComponent implements OnInit {
 
   setToCelcius(event) {
     this.celciusActive = true;
-    this.farenheitActive = false;
+    this.fahrenheitActive = false;
     this.setMetric()
   }
 
-  setToFarenheit(event) {
+  setToFahrenheit(event) {
     this.celciusActive = false;
-    this.farenheitActive = true;
+    this.fahrenheitActive = true;
     this.setMetric()
   }
 
   setMetric() { 
 
-    if (this.farenheitActive) {
+    if (this.fahrenheitActive) {
       this.selectedTemp = 32;
       this.tempRange = {
         high: this.temps.results[0].high + 72,
@@ -184,8 +184,10 @@ export class InputFormComponent implements OnInit {
       {
         monthQuery: this.selectedMonthName,
         tempQuery: this.selectedTemp,
-        metricQuery: this.celciusActive === true? "Celcius" : "Farenheit",
-        humidityQuery: this.selectedHumidity
+        humidityQuery: this.selectedHumidity,
+        metricQuery: this.celciusActive === true? "Celcius" : "Fahrenheit",
+        celciusActive: this.celciusActive,
+        fahrenheitActive: this.fahrenheitActive
       }
     ]);
   }
@@ -208,7 +210,7 @@ export class InputFormComponent implements OnInit {
     this.displayResults();
     this.validateForm();
 
-    if (this.farenheitActive === true) {
+    if (this.fahrenheitActive === true) {
       this.convertedTemp = this.selectedTemp
       this.performQuery(this.convertedTemp);
     } else {
@@ -250,7 +252,7 @@ export class InputFormComponent implements OnInit {
     for (let filteredCity of filteredCities) {
       cityResults.push({
         name: this.cities[filteredCity.city_id - 1].cityName,
-        avgFarenheit: filteredCity.avgFarenheit,
+        avgFahrenheit: filteredCity.avgFarenheit,
         avgHumidity: filteredCity.avgHumidity,
         coordinates: this.cities[filteredCity.city_id - 1].city_coords[0]
       });

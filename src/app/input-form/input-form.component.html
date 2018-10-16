@@ -18,7 +18,7 @@
     <div class="row" id="select-temp">
       <label>The temperature should be around: <span id="amount">{{selectedTemp}}</span> °
         <span id="celcius" (click)="setToCelcius($event)">Celcius</span> |
-        <span class="farenheit" (click)="setToFarenheit($event)">Farenheit</span>
+        <span class="fahrenheit" (click)="setToFahrenheit($event)">Fahrenheit</span>
         <br />
         <div class="slider">
           <input type="range" id="range" [min]="tempRange.low" [max]="tempRange.high" [value]="tempRange.mid" step="2" [(ngModel)]="selectedTemp" (ngModelChange)="tempSlider($event)">

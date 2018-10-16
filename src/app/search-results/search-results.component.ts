@@ -17,6 +17,11 @@ export class SearchResultsComponent implements OnInit {
   displaySearchQuery: any;
   isResultsAvailable = true;
   displaySelectedCityCoords: any;
+  celciusActive: boolean;
+  fahrenheitActive: boolean; 
+  metric: string;
+  toggleOn: string = "check";
+  toggleOff: string = "uncheck";
 
   constructor(private data: DataService) {}
 
@@ -31,7 +36,9 @@ export class SearchResultsComponent implements OnInit {
     });
 
     this.data.searchQueryMessage.subscribe(
-      searchQuery => (this.displaySearchQuery = searchQuery)
+      searchQuery => {(this.displaySearchQuery = searchQuery);
+      this.detectMetric()
+      }
     );
 
     this.data.searchCityCoordsMessage.subscribe(
@@ -50,6 +57,34 @@ export class SearchResultsComponent implements OnInit {
       this.isResultsAvailable = true;
     }
   }
+
+  changeMetric(event) {
+    this.celciusActive = !this.celciusActive
+    this.fahrenheitActive = !this.fahrenheitActive
+    console.log('checked.target', this.celciusActive, this.fahrenheitActive)
+    if (this.celciusActive) {
+      this.metric = "Celcius"
+    } else {
+      this.metric = "Fahrenheit";
+    }
+  }
+
+  detectMetric() {
+    console.log(this.displaySearchQuery, 'searchResult')
+    if (this.displaySearchQuery[0].fahrenheitActive === true) {
+      this.celciusActive = false;
+      this.fahrenheitActive = true;
+      $('.ui.checkbox').checkbox(this.toggleOn)
+      this.metric = "Fahrenheit";
+
+    } else {
+       this.celciusActive = true;
+      this.fahrenheitActive = false;
+      $('.ui.checkbox').checkbox(this.toggleOff)
+      this.metric = "Celcius";
+    }
+  }
+
 
   clearSearch() {
     this.displaySearchResults = null;
