@@ -10,17 +10,27 @@
         Select a month
       </div>
     </div>
+
+
+
+
+
     <div class="row" id="select-temp">
       <label>The temperature should be around: <span id="amount">{{selectedTemp}}</span> °
-        <span [class.celcius]="celciusActive" id="celcius" (click)="setMetric($event)">Celcius</span> |
-        <span [class.farenheit]="!farenheitActive" class="farenheit" (click)="setMetric($event)">Farenheit</span>
+        <span id="celcius" (click)="setToCelcius($event)">Celcius</span> |
+        <span class="farenheit" (click)="setToFarenheit($event)">Farenheit</span>
         <br />
-        <div class="slider" [class.showCelcius]="celciusActive">
-          <input *ngFor="let temp of temps" type="range" id="range" [min]="temp.low" [max]="temp.high" [value]="0" step="2" [(ngModel)]="selectedTemp" (ngModelChange)="tempSlider($event)">
+        <div class="slider">
+          <input type="range" id="range" [min]="tempRange.low" [max]="tempRange.high" [value]="tempRange.mid" step="2" [(ngModel)]="selectedTemp" (ngModelChange)="tempSlider($event)">
         </div>
-        <div class="slider" [class.showFarenheit]="!farenheitActive">
-          <input *ngFor="let temp of temps" type="range" id="range" [min]="temp.low-8" [max]="temp.high+72" [value]="32" step="2" [(ngModel)]="selectedTemp" (ngModelChange)="tempSlider($event)">
-        </div>
+
+        <!-- <div class="slider" [class.showFarenheit]="!farenheitActive">
+          <input *ngFor="let temp of tempRange" type="range" id="range" [min]="temp.low-8" [max]="temp.high+72" [value]="32" step="2" [(ngModel)]="selectedTemp" (ngModelChange)="tempSlider($event)">
+        </div> -->
+
+
+
+
         <div class="ui pointing red basic label" [class.showError]="isTempValue" id="error-label">
           Select a temperature
         </div>
@@ -37,7 +47,7 @@
       </div>
     </div>
     <div>
-      <button class="ui huge button" (click)="showData(); submit()" id="submit-data-button">Submit</button>
+      <button class="ui huge button" (click)="validateMetric(); submit()" id="submit-data-button">Submit</button>
     </div>
   </div>
   <app-search-results [resultsHidden]="submitClicked"></app-search-results>

@@ -1,24 +1,14 @@
-<div class="ui pagination menu" id="tile-pagination">
-            <!-- PAGINATION START -->
-            <a class="item">
-                  <i class="angle double left icon"></i>
-                </a>
-            <a class="item active">
-                  1
-                </a>
-            <a class="item">
-                  2
-                </a>
-            <a class="item">
-                  3
-                </a>
-            <a class="item">
-                  4
-                </a>
-            <a class="item">
-                  5
-                </a>
-            <a class="item">
-                  <i class="angle double right icon"></i>    
-                </a>
-          </div>
+
+
+
+    <div class="row" id="select-temp">
+      <label>The temperature should be around: <span id="amount">{{selectedTemp}}</span> °
+        <span [class.celcius]="celciusActive" id="celcius" (click)="setMetric($event)">Celcius</span> |
+        <span [class.farenheit]="!farenheitActive" class="farenheit" (click)="setMetric($event)">Farenheit</span>
+        <br />
+        <div class="slider" [class.showCelcius]="celciusActive">
+          <input *ngFor="let temp of temps" type="range" id="range" [min]="temp.low" [max]="temp.high" [value]="0" step="2" [(ngModel)]="selectedTemp" (ngModelChange)="tempSlider($event)">
+        </div>
+        <div class="slider" [class.showFarenheit]="!farenheitActive">
+          <input *ngFor="let temp of temps" type="range" id="range" [min]="temp.low-8" [max]="temp.high+72" [value]="32" step="2" [(ngModel)]="selectedTemp" (ngModelChange)="tempSlider($event)">
+        </div>

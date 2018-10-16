@@ -33,18 +33,20 @@ export class InputFormComponent implements OnInit {
   months: Month[];
   cities: City[];
   temps: Temp[];
+  tempRange: any;
   humidity: Humidity[];
 
   selectedMonth: number = 1;
   selectedMonthName: string = "January";
   selectedTemp: number = 66;
+  convertedTemp: number = null;
   selectedHumidity: number = 70;
   submitData: any[];
 
   filteredMonth: any[];
 
-  celciusActive: boolean;
-  farenheitActive: boolean;
+  celciusActive: boolean = true;
+  farenheitActive: boolean = false;
   isMonthValue = true;
   isTempValue = true;
   isHumidityValue = true;
@@ -69,7 +71,7 @@ export class InputFormComponent implements OnInit {
     this.getTemps();
     this.getHumidity();
     this.onMonthClick(event);
-    this.setMetric(event);
+    // this.setMetric(event);
     this.humiditySlider(event);
     // this.tempSlider(event);
   }
@@ -89,8 +91,6 @@ export class InputFormComponent implements OnInit {
   getMonths(): void {
     this.monthService.getMonths().subscribe(months => {(this.months = months.results)});
   }
-
-  // console.log('months', this.months)
 
   getCities(): void {
     this.cityService.getCities().subscribe(cities => {
@@ -117,8 +117,8 @@ export class InputFormComponent implements OnInit {
 
   getTemps(): void {
     this.tempService.getTemps().subscribe(temps => {
-      this.temps = temps.results;
-      // console.log('getFunc', this.temps)
+      this.temps = temps;
+      this.setMetric();
     });
   }
 
@@ -135,28 +135,40 @@ export class InputFormComponent implements OnInit {
   }
 
   tempSlider(event) {
-    if (this.celciusActive && !this.farenheitActive) {
-      console.log('celcius active')
-      this.selectedTemp = Math.round(event * 9 / 5 + 32)
-      console.log('celcius', this.selectedTemp);
-    } 
-      this.selectedTemp = event;
-    console.log('farenheit', this.selectedTemp);
-    
-
-    // if (this.farenheitActive) {
-    //   this.setFarenheit(event);
-    // }
-      
+    this.selectedTemp = event;
     this.isTempValue = true;
     
   }
 
-  setCelcius(event) {
+  setToCelcius(event) {
+    this.celciusActive = true;
+    this.farenheitActive = false;
+    this.setMetric()
   }
 
-  setFarenheit(event) {
-    
+  setToFarenheit(event) {
+    this.celciusActive = false;
+    this.farenheitActive = true;
+    this.setMetric()
+  }
+
+  setMetric() { 
+
+    if (this.farenheitActive) {
+      this.selectedTemp = 32;
+      this.tempRange = {
+        high: this.temps.results[0].high + 72,
+        low: this.temps.results[0].low - 8,
+        mid: 32
+      }
+    } else {
+      this.selectedTemp = 0;
+      this.tempRange = {
+        high: this.temps.results[0].high,
+        low: this.temps.results[0].low,
+        mid: 0
+      }
+    }
   }
 
   humiditySlider(event): void {
@@ -164,14 +176,6 @@ export class InputFormComponent implements OnInit {
     this.isHumidityValue = true;
   }
 
-  setMetric(event) { 
-    this.celciusActive = !this.celciusActive;
-    this.farenheitActive = !this.farenheitActive;
-    this.farenheitActive ? (this.selectedTemp = 32) : (this.selectedTemp = 0);
-    // void (this.farenheitActive == true && (this.selectedTemp = 32));
-    // void (this.farenheitActive == true && (this.selectedTemp = 32));
-    console.log(this.celciusActive, this.farenheitActive)
-  }
 
   displaySearchParams() {
     // sending search query params to other components 
@@ -180,6 +184,7 @@ export class InputFormComponent implements OnInit {
       {
         monthQuery: this.selectedMonthName,
         tempQuery: this.selectedTemp,
+        metricQuery: this.celciusActive === true? "Celcius" : "Farenheit",
         humidityQuery: this.selectedHumidity
       }
     ]);
@@ -198,22 +203,34 @@ export class InputFormComponent implements OnInit {
     this.data.changeSearchResultMessage(this.displaySearchResults);
   }
 
-  showData() {
+  validateMetric() {
     this.displaySearchParams();
     this.displayResults();
     this.validateForm();
 
+    if (this.farenheitActive === true) {
+      this.convertedTemp = this.selectedTemp
+      this.performQuery(this.convertedTemp);
+    } else {
+        this.convertedTemp = this.selectedTemp * 9 / 5 + 32;
+        this.performQuery(this.convertedTemp)
+    }
+
+
+   
+  }
+
+  performQuery() {
     let filteredCities = [];
     let cityResults = [];
-
 
     for (let i = 0; i < this.cities.length; i++) {
       let cityTemp = this.cities[i].city_temp[this.selectedMonth - 1];
 
       if (
         !(
-          Number(cityTemp.avgFarenheit) < this.selectedTemp + 10 &&
-          Number(cityTemp.avgFarenheit) > this.selectedTemp - 10
+          Number(cityTemp.avgFarenheit) < this.convertedTemp + 10 &&
+          Number(cityTemp.avgFarenheit) > this.convertedTemp - 10
         )
       )
         continue;

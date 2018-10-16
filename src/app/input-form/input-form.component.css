@@ -42,17 +42,17 @@
 }
 
 .farenheit {
-  color: blue;
+/*  color: blue;
   cursor: pointer;
-  font-weight: bold;
+  font-weight: bold;*/
 }
 
 .celcius {
-  color: blue;
+/*  color: blue;
   cursor: pointer;
-  font-weight: bold;
+  font-weight: bold;*/
 }
-
+/*
 .showCelcius {
   display: none;
 }
@@ -60,7 +60,7 @@
 .showFarenheit {
   display: none;
 }
-
+*/
 #humidity-text {
   border-bottom: 3px dotted #135823;
   padding-bottom: 5px;
