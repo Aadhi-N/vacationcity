@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BannerComponent implements OnInit {
 
-  getStartedClicked = false;
+  getStartedClicked = true;
 
   constructor() { }
 
@@ -16,8 +16,8 @@ export class BannerComponent implements OnInit {
   }
 
   getStarted () {
-    this.getStartedClicked = true;
+    this.getStartedClicked = false;
   }
-
+ 
  
 }

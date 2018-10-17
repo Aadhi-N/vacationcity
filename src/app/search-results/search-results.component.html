@@ -1,4 +1,4 @@
-<div [class.SsearchComponent]="resultsHidden">
+<div [class.searchComponent]="resultsHidden">
   <div class="row" id="search-results">
     <!-- ROW START -->
     <div class="ui huge header" id="search-message-title">Destinations that suit my weather preference:</div>
@@ -6,7 +6,31 @@
       <!-- STACKABLE COLUMN START -->
       <div class="ui segment column" id="tile-column">
         <!--UI SEGMENT COLUMN 1 START -->
-        <div class="ui header" id="search-message-result" *ngFor="let q of displaySearchQuery">Cities with "<em>{{q.tempQuery}} degrees {{q.metricQuery}}</em>" with "<em>{{q.humidityQuery}}%</em>" humidity in the month of "<em>{{q.monthQuery}}</em>":
+        <div class="ui header" id="search-message-result" *ngFor="let q of displaySearchQuery">
+          <ng-container *ngIf="q.metricQuery === 'Celcius' && fahrenheitActive; then fahrenheitConvertedValues"></ng-container>
+
+          <ng-container *ngIf="q.metricQuery === 'Fahrenheit' && celciusActive; then celciusConvertedValues; "></ng-container>
+
+          <ng-container *ngIf="q.metricQuery === 'Fahrenheit' && fahrenheitActive; then defaultValues; "></ng-container>
+
+          <ng-container *ngIf="q.metricQuery === 'Celcius' && celciusActive; then defaultValues; "></ng-container>
+
+          <ng-template #fahrenheitConvertedValues> 
+           <div class="value" >
+              Cities with "<em>{{(q.tempQuery * 9) / 5 + 32 | number: '1.0-0'}} degrees {{metric}}</em>" with "<em>{{q.humidityQuery}}%</em>" humidity in the month of "<em>{{q.monthQuery}}</em>":
+            </div>
+          </ng-template>
+          <ng-template #celciusConvertedValues>
+            <div class="value" > 
+              Cities with "<em>{{(q.tempQuery - 32) * 5 / 9 | number: '1.0-0'}} degrees {{metric}}</em>" with "<em>{{q.humidityQuery}}%</em>" humidity in the month of "<em>{{q.monthQuery}}</em>":
+            </div>
+          </ng-template>
+
+          <ng-template #defaultValues>
+            <div class="value" > 
+              Cities with "<em>{{q.tempQuery}} degrees {{metric}}</em>" with "<em>{{q.humidityQuery}}%</em>" humidity in the month of "<em>{{q.monthQuery}}</em>":
+            </div>
+          </ng-template>
         </div>
 
         <div class="field" (click)="changeMetric($event);">
@@ -32,7 +56,7 @@
                 <div class="ui inverted dimmer">
                   <div class="ui button" value="result.coordinates" (click)="locateOnMaps(result.coordinates)">Locate on map</div>
                 </div>
-                <img src="/assets/destination.png">
+                <img src="/assets/tileimg.png">
                 <div class="ui huge label" id="city-label">{{result.name}}</div>
               </div>
 
@@ -46,16 +70,11 @@
                 <div class="row" id="statistic-row">
                   <!-- TILE STATISTICS START-->
                   <div class="ui horizontal statistic">
-
-
-
-
-
                     <ng-container *ngIf="celciusActive; then celciusValues; else fahrenheitValues"></ng-container>
 
                     <ng-template #celciusValues> 
                       <div class="value" >
-                      {{result.avgFahrenheit - 32 * 5 / 9 | number: '1.0-0'}}°
+                      {{(result.avgFahrenheit - 32) * 5 / 9 | number: '1.0-0'}}°
                       </div>
                     </ng-template>
 
@@ -64,20 +83,6 @@
                         {{result.avgFahrenheit}}°
                       </div>
                     </ng-template>
-
-                   
-
-
-
-
-
-
-
-
-
-
-
-
                     <div class="label">
                       {{metric}}
                     </div>
@@ -114,7 +119,7 @@
         <!----------------------------- pagination  -------------------------->
         <div class="row" [class.showPagination]="!isResultsAvailable" id="pagination-row">
           
-          <pagination-controls (pageChange)="p = $event" class="ui pagination menu"></pagination-controls>
+          <pagination-controls (pageChange)="p = $event" class="ui pagination menu" id="ngx-pagination"></pagination-controls>
         </div>
         <!-- PAGINATION END -->
         <!----------------------------- pagination  -------------------------->
@@ -139,6 +144,5 @@
         <!----------------------------- map column  -------------------------->
     </div>
     <!-- STACKABLE COLUMN END -->
-      {{resultsHidden}}
   </div><!-- ROW END -->
 </div><!-- COMPONENT END -->

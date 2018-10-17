@@ -40,12 +40,13 @@ export class MapComponent implements OnInit {
       this.previous.close();
     }
     this.previous = infoWindow;
+    this.changeSelectedCity(infoWindow)
   }
 
   changeZoom(coordinates) {
     this.focusZoom = 10;
     this.centerLat = Number(coordinates.latitude);
-    this.centerLng = Number(coordinates.longtitude);
+    this.centerLng = Number(coordinates.longitude);
   }
 
   changeSelectedCity(searchCityCoords) {

@@ -38,12 +38,13 @@
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
+
 #city-label {
   padding-left: 40px;
   padding-right: 40px;
   opacity: 1;
   color: white;
-  background-color: #2185d0;
+  background-color: #6435c97a;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -57,7 +58,8 @@
 }
 
 #meta-source {
-  padding-top: 30px;
+  padding-bottom: 20px;
+  text-align: center;
 }
 
 #map-container-image {
@@ -141,6 +143,11 @@
 
 .ui.cards~.ui.cards {
   margin-top: -0.9em;
+}
+
+#ngx-pagination {
+  background-color: #372a222b;
+  padding-right: 40px;
 }
 
 hr {

@@ -7,13 +7,12 @@
     <div class="info-window">
       <h2>Bjork</h2>
     </div></agm-info-window></agm-marker>
-  <agm-marker *ngFor="let result of displaySearchResults" [latitude]="result.coordinates.latitude" [longitude]="result.coordinates.longtitude" (markerClick)="clickedMarker(infoWindow); changeZoom(result.coordinates)">
+  <agm-marker *ngFor="let result of displaySearchResults" [latitude]="result.coordinates.latitude" [longitude]="result.coordinates.longitude" (markerClick)="clickedMarker(infoWindow); changeZoom(result.coordinates)">
     <agm-info-window #infoWindow>
       <div class="info-window">
         <h2 id="info-window-header">{{result.name}} </h2>
-        <div class="meta">Avg. Temp: {{result.avgFarenheit}}° Farenheit</div>
-        <div class="meta">Avg. Humidity: {{result.avgHumidity}}%</div>
+        <div class="meta" id="icon"><a href="https://www.google.com/search?q=visiting+{{result.name}}" target="_blank"><img id="link-icon" src="assets/linkicon.png" alt="external link icon"></a></div>
+        <div class="meta" id="learn-message"><a href="https://www.google.com/search?q=visiting+{{result.name}}" target="_blank">Learn more about {{result.name}}</a></div>
     </div></agm-info-window>
   </agm-marker>
 </agm-map>
-  <p>selected coords{{displaySelectedCityCoords.lat}}</p>

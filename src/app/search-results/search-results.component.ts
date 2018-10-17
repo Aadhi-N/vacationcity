@@ -22,7 +22,6 @@ export class SearchResultsComponent implements OnInit {
   metric: string;
   toggleOn: string = "check";
   toggleOff: string = "uncheck";
-  tempValue: number = 10001;
 
   constructor(private data: DataService) {}
 
@@ -121,7 +120,7 @@ export class SearchResultsComponent implements OnInit {
     this.data.changeCityCoordsMessage(
       this.displaySelectedCityCoords = {
         lat: Number(event.latitude),
-        lng: Number(event.longtitude),
+        lng: Number(event.longitude),
       }
     )
   }

@@ -28,7 +28,7 @@ import { HumidityService } from "../humidity.service";
 export class InputFormComponent implements OnInit {
   @Input() formHidden: string;
 
-  submitClicked = false;
+  submitClicked = true;
 
   months: Month[];
   cities: City[];
@@ -36,11 +36,11 @@ export class InputFormComponent implements OnInit {
   tempRange: any;
   humidity: Humidity[];
 
-  selectedMonth: number = 1;
-  selectedMonthName: string = "January";
-  selectedTemp: number = 66;
+  selectedMonth: number;
+  selectedMonthName: string;
+  selectedTemp: number;
   convertedTemp: number = null;
-  selectedHumidity: number = 70;
+  selectedHumidity: number;
   submitData: any[];
 
   filteredMonth: any[];
@@ -58,7 +58,6 @@ export class InputFormComponent implements OnInit {
   constructor(
     private monthService: MonthService,
     private cityService: CityService,
-    // private cityTempService: CityTempService,
     private tempService: TempService,
     private humidityService: HumidityService,
     private data: DataService
@@ -67,7 +66,6 @@ export class InputFormComponent implements OnInit {
   ngOnInit() {
     this.getMonths();
     this.getCities();
-    // this.getCityTemps();
     this.getTemps();
     this.getHumidity();
     this.onMonthClick(event);
@@ -194,11 +192,9 @@ export class InputFormComponent implements OnInit {
 
   validateForm() {
     /* ternary condition that evaluates if filter options are selected; triggers error message if unselected */
-   /* COMMENTING OUT FOR DEV PURPOSES
     void (this.selectedMonth === undefined && (this.isMonthValue = false));
     void (this.selectedTemp === undefined && (this.isTempValue = false));
     void (this.selectedHumidity === undefined && (this.isHumidityValue = false));
-    */
   }
 
   displayResults() {
@@ -217,9 +213,6 @@ export class InputFormComponent implements OnInit {
         this.convertedTemp = this.selectedTemp * 9 / 5 + 32;
         this.performQuery(this.convertedTemp)
     }
-
-
-   
   }
 
   performQuery() {
@@ -231,8 +224,8 @@ export class InputFormComponent implements OnInit {
 
       if (
         !(
-          Number(cityTemp.avgFarenheit) < this.convertedTemp + 10 &&
-          Number(cityTemp.avgFarenheit) > this.convertedTemp - 10
+          Number(cityTemp.avgFahrenheit) < this.convertedTemp + 10 &&
+          Number(cityTemp.avgFahrenheit) > this.convertedTemp - 10
         )
       )
         continue;
@@ -252,7 +245,7 @@ export class InputFormComponent implements OnInit {
     for (let filteredCity of filteredCities) {
       cityResults.push({
         name: this.cities[filteredCity.city_id - 1].cityName,
-        avgFahrenheit: filteredCity.avgFarenheit,
+        avgFahrenheit: filteredCity.avgFahrenheit,
         avgHumidity: filteredCity.avgHumidity,
         coordinates: this.cities[filteredCity.city_id - 1].city_coords[0]
       });
@@ -264,6 +257,6 @@ export class InputFormComponent implements OnInit {
   }
 
   submit() {
-    this.submitClicked = true;
+    this.submitClicked = false;
   }
 }

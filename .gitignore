@@ -49,3 +49,8 @@ Thumbs.db
 
 #pg database keys
 pgkeys.js
+
+#pg database dump folder
+db_dump/
+latest.dump
+weather_data_oct16.dump
