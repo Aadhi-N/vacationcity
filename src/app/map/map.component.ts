@@ -11,12 +11,10 @@ export class MapComponent implements OnInit {
 
   displaySearchResults: any = null;
   activeCity: boolean = false;
-
   centerLat: number = 43.332987;
   centerLng: number = 11.939059;
   focusZoom: number = 2.1;
-  previous: boolean;
-  activeCity: boolean;
+  previous: any;
 
   constructor(private data: DataService) { }
 

@@ -87,7 +87,7 @@ export class InputFormComponent implements OnInit {
   //DISPLAYS LIST OF MONTHS FROM DATA SOURCE
 
   getMonths(): void {
-    this.monthService.getMonths().subscribe(months => {(this.months = months.results)});
+    this.monthService.getMonths().subscribe(months => {(this.months = months)});
   }
 
   getCities(): void {
@@ -122,7 +122,7 @@ export class InputFormComponent implements OnInit {
 
   getHumidity(): void {
     this.humidityService.getHumidity().subscribe(humidity => {
-      this.humidity = humidity.results;
+      this.humidity = humidity;
     });
   }
 
@@ -155,15 +155,15 @@ export class InputFormComponent implements OnInit {
     if (this.fahrenheitActive) {
       this.selectedTemp = 32;
       this.tempRange = {
-        high: this.temps.results[0].high + 72,
-        low: this.temps.results[0].low - 8,
+        high: this.temps[0].high + 72,
+        low: this.temps[0].low - 8,
         mid: 32
       }
     } else {
       this.selectedTemp = 0;
       this.tempRange = {
-        high: this.temps.results[0].high,
-        low: this.temps.results[0].low,
+        high: this.temps[0].high,
+        low: this.temps[0].low,
         mid: 0
       }
     }
@@ -208,19 +208,20 @@ export class InputFormComponent implements OnInit {
 
     if (this.fahrenheitActive === true) {
       this.convertedTemp = this.selectedTemp
-      this.performQuery(this.convertedTemp);
+      this.performQuery();
     } else {
         this.convertedTemp = this.selectedTemp * 9 / 5 + 32;
-        this.performQuery(this.convertedTemp)
+        this.performQuery()
     }
   }
 
   performQuery() {
     let filteredCities = [];
     let cityResults = [];
+    console.log('convertedTemp', this.convertedTemp)
 
     for (let i = 0; i < this.cities.length; i++) {
-      let cityTemp = this.cities[i].city_temp[this.selectedMonth - 1];
+      let cityTemp: any = this.cities[i].city_temp[this.selectedMonth - 1];
 
       if (
         !(
