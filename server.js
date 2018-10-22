@@ -5,8 +5,6 @@ const pg = require('pg');
 const format = require('pg-format');
 const pgKeys = require('./pgkeys.js');
 
-// import { pgKeys } from './pgkeys.js';
-
 let config = {
   user: pgKeys.PGUSER,
   password: pgKeys.PGPASSWORD,
@@ -15,9 +13,15 @@ let config = {
   idleTimeoutMillis: 30000
 }
 
-const pool = new pg.Pool(config);
+// const pool = new pg.Pool(config);
 
-console.log('server start', config)
+const { Pool } = require('pg');
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: true
+});
+
+console.log('server start')
 
 // Serve only the static files form the dist directory
 app.use(express.static(__dirname + '/dist/vacationcity'));
