@@ -45,7 +45,7 @@ import { environment } from "../environments/environment";
     //   InMemoryDataService, { dataEncapsulation: false }
     //   ),
     AgmCoreModule.forRoot({
-      apiKey: environment.google_maps_key
+      apiKey: environment.google_maps_key 
     }),
     NgxPaginationModule
   ],
