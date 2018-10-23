@@ -52,5 +52,3 @@ db_dump/
 latest.dump
 weather_data_oct16.dump
 
-#environment vars
-src/environments/
