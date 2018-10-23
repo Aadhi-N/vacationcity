@@ -20,7 +20,9 @@ import { MapComponent } from './map/map.component';
 import { AgmCoreModule } from '@agm/core';
 import { TestDataComponent } from './test-data/test-data.component';
 
-import { apikey } from './apikey';
+// import { apikey } from './apikey';
+
+import { environment } from "../environments/environment";
 
 
 @NgModule({
@@ -43,7 +45,7 @@ import { apikey } from './apikey';
     //   InMemoryDataService, { dataEncapsulation: false }
     //   ),
     AgmCoreModule.forRoot({
-      apiKey: apikey.key
+      apiKey: environment.google_maps_key
     }),
     NgxPaginationModule
   ],
