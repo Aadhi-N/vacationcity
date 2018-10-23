@@ -3,12 +3,14 @@ const app = express();
 
 const pg = require('pg');
 const format = require('pg-format');
-const environment = require('src/environments/environment');
+
+const pgKeys = require('./pgkeys.js');
+
 
 let config = {
-  user: environment.PG_USER,
-  password: environment.PG_PASSWORD,
-  database: environment.PG_DATABASE,
+  user: pgKeys.PG_USER,
+  password: pgKeys.PG_PASSWORD,
+  database: pgKeys.PG_DATABASE,
   max: 10,
   idleTimeoutMillis: 30000
 }

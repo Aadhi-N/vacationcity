@@ -44,8 +44,7 @@ Thumbs.db
 # weather data dump file
 ./weather_data.dump
 
-#pg database keys
-pgkeys.js
+
 
 #pg database dump folder
 db_dump/

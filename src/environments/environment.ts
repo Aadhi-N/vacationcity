@@ -5,9 +5,6 @@
 export const environment = {
   production: false,
   google_maps_key: "",
-  PG_USER: "",
-  PG_PASSWORD: "", 
-  PG_DATABASE: ""
 };
 
 /*
