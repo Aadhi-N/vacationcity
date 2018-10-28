@@ -1,11 +1,7 @@
 const express = require('express');
 const app = express();
 const path = require('path');
-
 const format = require('pg-format');
-
-
-
 const cors = require('cors');
 
 
@@ -77,10 +73,6 @@ switch (env) {
 
         break;
 }
-
-
-
-
 
 console.log('server start')
 
