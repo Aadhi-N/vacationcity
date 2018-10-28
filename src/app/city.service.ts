@@ -15,13 +15,13 @@ import { CityCoord } from "./cityCoord";
   providedIn: 'root'
 })
 export class CityService {
-  private citiesUrl = "http://localhost:8000/api/cities";
-  private cityTempsUrl = "http://localhost:8000/api/citytemps";
-  private cityCoordsUrl = "http://localhost:8000/api/citycoords";
+  // private citiesUrl = "http://localhost:8000/api/cities";
+  // private cityTempsUrl = "http://localhost:8000/api/citytemps";
+  // private cityCoordsUrl = "http://localhost:8000/api/citycoords";
 
-  // private citiesUrl = "api/cities";
-  // private cityTempsUrl = "api/cityTemps";
-  // private cityCoordsUrl = "api/cityCoords";
+  private citiesUrl = "api/cities";
+  private cityTempsUrl = "api/cityTemps";
+  private cityCoordsUrl = "api/cityCoords";
 
   constructor(
     private http: HttpClient,

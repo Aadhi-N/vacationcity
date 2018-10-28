@@ -10,8 +10,8 @@ import { Temp } from "./temp";
   providedIn: 'root'
 })
 export class TempService {
-  // private tempsUrl = "api/temps";
-  private tempsUrl = "http://localhost:8000/api/temps";
+  private tempsUrl = "api/temps";
+  // private tempsUrl = "http://localhost:8000/api/temps";
 
   constructor(
     private http: HttpClient,

@@ -10,8 +10,8 @@ import { Humidity } from "./humidity";
   providedIn: 'root'
 })
 export class HumidityService {
-  // private humidityUrl = "api/humidity";
-  private humidityUrl = "http://localhost:8000/api/humidity";
+  private humidityUrl = "api/humidity";
+  // private humidityUrl = "http://localhost:8000/api/humidity";
 
   constructor(
     private http: HttpClient,
