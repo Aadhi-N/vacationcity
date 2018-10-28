@@ -45,11 +45,15 @@ const pool = new Pool({
 
 console.log('server start')
 
-// Serve only the static files form the dist directory
-app.use(express.static(__dirname + '/dist/vacationcity'));
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(__dirname + 'dist/vacationcity'));
+}
+
+// Serve only the static files from the dist directory
+// app.use(express.static(__dirname + '/dist/vacationcity'));
 
 app.get('/', function(req,res) {
-res.sendFile(path.join(__dirname + '/dist/vacationcity/index.html'));
+  res.sendFile(path.join(__dirname,  '/dist/vacationcity', 'index.html'));
 });
 
 app.get('/api/months', async (req, res) => {
