@@ -6,28 +6,42 @@ const format = require('pg-format');
 
 const pgKeys = require('./pgkeys.js');
 
-const pgKeys_dev = require('./pgkeys_dev.js');
 
 
 
+
+/* SETTINGS FOR DEV */
+// const pgKeys_dev = require('./pgkeys_dev.js');
+// let config = {
+//   user: pgKeys_dev.PG_USER,
+//   password: pgKeys_dev.PG_PASSWORD,
+//   database: pgKeys_dev.PG_DATABASE,
+//   max: 10,
+//   idleTimeoutMillis: 30000
+// }
+
+// const pg = require('pg');
+// let pool = new pg.Pool(config);
+
+/* SETTINGS FOR DEV */
+
+/* SETTINGS FOR PROD */
 let config = {
-  user: pgKeys.PG_USER || pgKeys_dev.PG_USER,
-  password: pgKeys.PG_PASSWORD || pgKeys_dev.PG_PASSWORD,
-  database: pgKeys.PG_DATABASE || pgKeys_dev.PG_DATABASE,
+  user: pgKeys.PG_USER,
+  password: pgKeys.PG_PASSWORD,
+  database: pgKeys.PG_DATABASE ,
   max: 10,
   idleTimeoutMillis: 30000
 }
 
-/* SETTINGS FOR DEV */
-// const pg = require('pg');
-// let pool = new pg.Pool(config);
-
-/* SETTINGS FOR PROD */
 const { Pool } = require('pg');
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: true
 });
+/* SETTINGS FOR PROD */
+
+
 
 console.log('server start')
 
