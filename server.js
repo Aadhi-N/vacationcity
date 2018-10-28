@@ -1,10 +1,11 @@
 const express = require('express');
 const app = express();
+const path = require('path');
 
-const pg = require('pg');
 const format = require('pg-format');
 
 const pgKeys = require('./pgkeys.js');
+
 
 
 let config = {
@@ -15,7 +16,10 @@ let config = {
   idleTimeoutMillis: 30000
 }
 
-// const pool = new pg.Pool(config);
+// var env = process.env.NODE_ENV || 'dev';
+// const pg = require('pg');
+// let pool = new pg.Pool(config);
+
 
 const { Pool } = require('pg');
 const pool = new Pool({

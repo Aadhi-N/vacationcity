@@ -24,7 +24,7 @@ import { TestDataComponent } from './test-data/test-data.component';
 
 import { environment } from "../environments/environment";
 
-
+console.log('from module', environment.google_maps_key)
 @NgModule({
   declarations: [
     AppComponent,
