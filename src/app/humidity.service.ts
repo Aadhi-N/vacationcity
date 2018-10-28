@@ -6,12 +6,17 @@ import { MessageService } from "./message.service";
 import { Observable, of } from "rxjs";
 import { Humidity } from "./humidity";
 
+import { environment } from "../environments/environment";
+
+
+
 @Injectable({
   providedIn: 'root'
 })
 export class HumidityService {
-  private humidityUrl = "api/humidity";
+  // private humidityUrl = "api/humidity";
   // private humidityUrl = "http://localhost:8000/api/humidity";
+  private humidityUrl = `${environment.apiUrl}/humidity`;
 
   constructor(
     private http: HttpClient,

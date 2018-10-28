@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, Injectable } from '@angular/core';
 import { FormsModule } from "@angular/forms";
 import { HttpClientModule } from '@angular/common/http';
 
@@ -18,13 +18,20 @@ import { FooterComponent } from './footer/footer.component';
 import { MapComponent } from './map/map.component';
 
 import { AgmCoreModule } from '@agm/core';
+import { LAZY_MAPS_API_CONFIG, LazyMapsAPILoaderConfigLiteral } from '@agm/core/services'
+
 import { TestDataComponent } from './test-data/test-data.component';
 
 // import { apikey } from './apikey';
 
 import { environment } from "../environments/environment";
 
-console.log('from module', environment.google_maps_key)
+@Injectable()
+   export class GoogleMapsConfig implements LazyMapsAPILoaderConfigLiteral {
+    apiKey: string = environment.google_maps_key;
+   }
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,12 +51,17 @@ console.log('from module', environment.google_maps_key)
     // HttpClientInMemoryWebApiModule.forRoot(
     //   InMemoryDataService, { dataEncapsulation: false }
     //   ),
-    AgmCoreModule.forRoot({
-      apiKey: environment.google_maps_key 
-    }),
+    AgmCoreModule.forRoot(),
     NgxPaginationModule
   ],
-  providers: [],
+  providers: [
+    {provide: LAZY_MAPS_API_CONFIG, useClass: GoogleMapsConfig}
+  ],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }
+
+
+
+

@@ -9,6 +9,8 @@ import { City } from "./city";
 import { CityTemp } from "./cityTemp";
 import { CityCoord } from "./cityCoord";
 
+import { environment } from "../environments/environment"
+
 
 
 @Injectable({
@@ -19,9 +21,12 @@ export class CityService {
   // private cityTempsUrl = "http://localhost:8000/api/citytemps";
   // private cityCoordsUrl = "http://localhost:8000/api/citycoords";
 
-  private citiesUrl = "api/cities";
-  private cityTempsUrl = "api/cityTemps";
-  private cityCoordsUrl = "api/cityCoords";
+  // private citiesUrl = "api/cities";
+  // private cityTempsUrl = "api/cityTemps";
+  // private cityCoordsUrl = "api/cityCoords";
+  private citiesUrl = `${environment.apiUrl}/cities`;
+  private cityTempsUrl = `${environment.apiUrl}/citytemps`;
+  private cityCoordsUrl = `${environment.apiUrl}/citycoords`;
 
   constructor(
     private http: HttpClient,

@@ -6,16 +6,15 @@ import { MessageService } from "./message.service";
 import { Observable, of } from "rxjs";
 import { Month } from "./month";
 
-// import { environment } from "../environments/environment";
-
+import { environment } from "../environments/environment";
 
 @Injectable({
   providedIn: "root"
 })
 export class MonthService {
-  private monthsUrl = "api/months";
+  // private monthsUrl = "api/months";
   // private monthsUrl = "https://vacationcity.herokuapp.com/api/months";
-
+  private monthsUrl = `${environment.apiUrl}/months`;
 
   constructor(
     private http: HttpClient,

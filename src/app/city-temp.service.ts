@@ -7,12 +7,16 @@ import { MessageService } from "./message.service";
 import { Observable, of } from "rxjs";
 import { CityTemp } from "./cityTemp";
 
+import { environment } from "../environments/environment"
+
 @Injectable({
   providedIn: 'root'
 })
 export class CityTempService {
-  private cityTempsUrl = "api/cityTemps";
+  // private cityTempsUrl = "api/cityTemps";
   // private cityTempsUrl = "http://localhost:8000/api/citytemps";
+  private cityTempsUrl = `${environment.apiUrl}/cityTemps`;
+
 
   constructor(private http: HttpClient,
     private messageService: MessageService
