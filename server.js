@@ -6,6 +6,7 @@ const format = require('pg-format');
 
 const pgKeys = require('./pgkeys.js');
 
+const cors = require('cors');
 
 
 
@@ -46,11 +47,13 @@ const pool = new Pool({
 console.log('server start')
 
 if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(__dirname + 'dist/vacationcity'));
+  app.use(express.static(__dirname + '/dist/vacationcity'));
 }
 
 // Serve only the static files from the dist directory
 // app.use(express.static(__dirname + '/dist/vacationcity'));
+
+app.use(cors());
 
 app.get('/', function(req,res) {
   res.sendFile(path.join(__dirname,  '/dist/vacationcity', 'index.html'));
@@ -61,7 +64,7 @@ app.get('/api/months', async (req, res) => {
     const client = await pool.connect()
     const result = await client.query('SELECT * FROM months_table');
     const results = { 'results': (result) ? result.rows : null};
-    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Origin", "*" );
     res.send(results);
 
     // console.log(results)

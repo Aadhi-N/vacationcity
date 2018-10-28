@@ -130,6 +130,7 @@ export class InputFormComponent implements OnInit {
     this.selectedMonth = event.target.value;
     this.selectedMonthName = this.months[event.target.value - 1].monthName;
     this.isMonthValue = true;
+    console.log(this.selectedMonth)
   }
 
   tempSlider(event) {
