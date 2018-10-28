@@ -26,6 +26,8 @@ import { TestDataComponent } from './test-data/test-data.component';
 
 import { environment } from "../environments/environment";
 
+console.log('CHECKING ENVIRONMENT API KEY', environment.google_maps_key)
+
 @Injectable()
    export class GoogleMapsConfig implements LazyMapsAPILoaderConfigLiteral {
     apiKey: string = environment.google_maps_key;
