@@ -4,23 +4,23 @@ const path = require('path');
 
 const format = require('pg-format');
 
-const pgKeys = require('./pgkeys.js');
+
 
 const cors = require('cors');
 
 
 /* SETTINGS FOR DEV */
-    const pgKeys_dev = require('./pgkeys_dev.js');
-    let config = {
-      user: pgKeys_dev.PG_USER,
-      password: pgKeys_dev.PG_PASSWORD,
-      database: pgKeys_dev.PG_DATABASE,
-      max: 10,
-      idleTimeoutMillis: 30000
-    }
+    // const pgKeys_dev = require('./pgkeys_dev.js');
+    // let config = {
+    //   user: pgKeys_dev.PG_USER,
+    //   password: pgKeys_dev.PG_PASSWORD,
+    //   database: pgKeys_dev.PG_DATABASE,
+    //   max: 10,
+    //   idleTimeoutMillis: 30000
+    // }
 
-    const pg = require('pg');
-    let pool = new pg.Pool(config);
+    // const pg = require('pg');
+    // let pool = new pg.Pool(config);
 
 /* SETTINGS FOR DEV */
 
@@ -39,6 +39,46 @@ const cors = require('cors');
     //   ssl: true
     // });
 /* SETTINGS FOR PROD */
+
+var env = process.env.NODE_ENV;
+
+const {Pool} = require('pg');
+let config;
+let pool;
+
+switch (env) {
+    case 'development':
+        const pgKeys_dev = require('./pgkeys_dev.js');
+        config = {
+          user: pgKeys_dev.PG_USER,
+          password: pgKeys_dev.PG_PASSWORD,
+          database: pgKeys_dev.PG_DATABASE,
+          max: 10,
+          idleTimeoutMillis: 30000
+        }
+
+        pool = new Pool(config);
+
+        break;
+    case 'production':
+        const pgKeys = require('./pgkeys.js');
+        config = {
+          user: pgKeys.PG_USER,
+          password: pgKeys.PG_PASSWORD,
+          database: pgKeys.PG_DATABASE ,
+          max: 10,
+          idleTimeoutMillis: 30000
+        }
+
+        pool = new Pool({
+          connectionString: process.env.DATABASE_URL,
+          ssl: true
+        });
+
+        break;
+}
+
+
 
 
 
