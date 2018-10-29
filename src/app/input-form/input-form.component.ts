@@ -33,14 +33,17 @@ export class InputFormComponent implements OnInit {
   months: Month[];
   cities: City[];
   temps: Temp[];
-  tempRange: any;
+  tempRange: any = {
+    high: 50,
+    low: -50,
+    mid: 0}
   humidity: Humidity[];
 
   selectedMonth: number;
   selectedMonthName: string;
-  selectedTemp: number;
+  selectedTemp: number = 0;
   convertedTemp: number = null;
-  selectedHumidity: number;
+  selectedHumidity: number = 50;
   submitData: any[];
 
   filteredMonth: any[];
@@ -68,10 +71,6 @@ export class InputFormComponent implements OnInit {
     this.getCities();
     this.getTemps();
     this.getHumidity();
-    this.onMonthClick(event);
-    // this.setMetric(event);
-    this.humiditySlider(event);
-    // this.tempSlider(event);
   }
 
   ngAfterViewInit() {
@@ -116,7 +115,6 @@ export class InputFormComponent implements OnInit {
   getTemps(): void {
     this.tempService.getTemps().subscribe(temps => {
       this.temps = temps;
-      this.setMetric();
     });
   }
 
@@ -130,13 +128,11 @@ export class InputFormComponent implements OnInit {
     this.selectedMonth = event.target.value;
     this.selectedMonthName = this.months[event.target.value - 1].monthName;
     this.isMonthValue = true;
-    console.log(this.selectedMonth)
   }
 
   tempSlider(event) {
     this.selectedTemp = event;
     this.isTempValue = true;
-    
   }
 
   setToCelcius(event) {
@@ -152,21 +148,21 @@ export class InputFormComponent implements OnInit {
   }
 
   setMetric() { 
+    if (this.celciusActive === true) {
+      this.selectedTemp !== 0 ? this.selectedTemp : 0;
 
-    if (this.fahrenheitActive) {
-      this.selectedTemp = 32;
       this.tempRange = {
-        high: this.temps['results'][0].high + 72,
-        low: this.temps['results'][0].low - 8,
-        mid: 32
+        high: (this.temps['results'][0].high - 32) * 5 / 9,
+        low: (this.temps['results'][0].low - 32) * 5 / 9
+        mid: 0
       }
     } else {
-      this.selectedTemp = 0;
+      this.selectedTemp !== 32 ? this.selectedTemp : 32;
       this.tempRange = {
         high: this.temps['results'][0].high,
         low: this.temps['results'][0].low,
         mid: 0
-      }
+      };
     }
   }
 
@@ -175,9 +171,8 @@ export class InputFormComponent implements OnInit {
     this.isHumidityValue = true;
   }
 
-
   displaySearchParams() {
-    // sending search query params to other components 
+    /* sending search query params to other components */
 
     this.data.changeSearchQueryMessage([
       {
@@ -196,38 +191,36 @@ export class InputFormComponent implements OnInit {
     void (this.selectedMonth === undefined && (this.isMonthValue = false));
     void (this.selectedTemp === undefined && (this.isTempValue = false));
     void (this.selectedHumidity === undefined && (this.isHumidityValue = false));
+
+    this.validateMetric();
   }
 
-  displayResults() {
-    this.data.changeSearchResultMessage(this.displaySearchResults);
+  displayResults(results) {
+    this.data.changeSearchResultMessage(results);
+    console.log('DISPLAY RESULTS', results)
   }
 
   validateMetric() {
-    this.displaySearchParams();
-    this.displayResults();
-    this.validateForm();
-
     if (this.fahrenheitActive === true) {
       this.convertedTemp = this.selectedTemp
-      this.performQuery();
+      this.performQuery(this.convertedTemp);
     } else {
         this.convertedTemp = this.selectedTemp * 9 / 5 + 32;
-        this.performQuery()
+        this.performQuery(this.convertedTemp)
     }
   }
 
-  performQuery() {
+  performQuery(convertedTemp) {
     let filteredCities = [];
     let cityResults = [];
-    // console.log('convertedTemp', this.convertedTemp)
 
     for (let i = 0; i < this.cities.length; i++) {
       let cityTemp: any = this.cities[i].city_temp[this.selectedMonth - 1];
 
       if (
         !(
-          Number(cityTemp.avgFahrenheit) < this.convertedTemp + 10 &&
-          Number(cityTemp.avgFahrenheit) > this.convertedTemp - 10
+          Number(cityTemp.avgFahrenheit) < convertedTemp + 10 &&
+          Number(cityTemp.avgFahrenheit) > convertedTemp - 10
         )
       )
         continue;
@@ -256,6 +249,9 @@ export class InputFormComponent implements OnInit {
     // ASSIGN PROPERTY TO MESSAGE SERVICE
     this.filteredSearchResults = cityResults;    
     this.displaySearchResults = this.filteredSearchResults;
+
+    this.displaySearchParams();
+    this.displayResults(this.displaySearchResults);
   }
 
   submit() {
