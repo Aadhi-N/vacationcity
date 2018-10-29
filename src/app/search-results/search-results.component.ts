@@ -9,14 +9,17 @@ declare var $: any;
 })
 export class SearchResultsComponent implements OnInit {
   /* FROM PARENT - HIDE COMPONENT UNTIL SUBMIT BUTTON CLICKED */
-  @Input() resultsHidden: string;
+  @Input() resultsHidden: boolean;
 
   p: number = 1;
   displaySearchResults: any;
   displayCoordResults: any;
   displaySearchQuery: any;
   isResultsAvailable = true;
-  displaySelectedCityCoords: any;
+  displaySelectedCityCoords: any = {
+    lat: null,
+    lng: null
+  }
   celciusActive: boolean;
   fahrenheitActive: boolean; 
   metric: string;
@@ -32,19 +35,18 @@ export class SearchResultsComponent implements OnInit {
     this.data.searchResultMessage.subscribe(searchResult => {
       this.displaySearchResults = searchResult;
       this.validateResults();
-      this.convertToCelcius();
+      // console.log('SEARCH RESULTS', searchResult)
     });
 
     this.data.searchQueryMessage.subscribe(
-      searchQuery => {(this.displaySearchQuery = searchQuery);
-      this.detectMetric()
+      searchQuery => {this.displaySearchQuery = searchQuery;
+      this.detectMetric();
       }
     );
 
     this.data.searchCityCoordsMessage.subscribe(
       searchCityCoords => {(this.displaySelectedCityCoords = searchCityCoords)}
     );
-
   }
 
   validateResults() {
@@ -58,23 +60,7 @@ export class SearchResultsComponent implements OnInit {
     }
   }
 
-  convertToCelcius() {
-    console.log('resukts', )
-    // this.displaySearchResults.map((result) => {
-    //   console.log('result', result)
-    // })
-
-    // for (let result of this.displaySearchResults) {
-    //   if (this.displaySearchQuery[0].fahrenheitActive === true) {
-    //     this.tempValue = result.avgFahrenheit;
-    //   }
-    // }
-  }
-
-
   detectMetric() {
-    console.log(this.displaySearchQuery, 'query')
-    console.log(this.displaySearchResults, 'searchResult')
     if (this.displaySearchQuery[0].fahrenheitActive === true) {
       this.celciusActive = false;
       this.fahrenheitActive = true;
@@ -103,8 +89,6 @@ export class SearchResultsComponent implements OnInit {
     } 
   }
 
-
-
   clearSearch() {
     this.displaySearchResults = null;
   }
@@ -117,11 +101,13 @@ export class SearchResultsComponent implements OnInit {
   }
 
   locateOnMaps(event) {
-    this.data.changeCityCoordsMessage(
-      this.displaySelectedCityCoords = {
-        lat: Number(event.latitude),
-        lng: Number(event.longitude),
-      }
-    )
+    if (event) {
+      this.data.changeCityCoordsMessage(
+        this.displaySelectedCityCoords = {
+          lat: Number(event.latitude),
+          lng: Number(event.longitude),
+        }
+      )
+    }
   }
 }

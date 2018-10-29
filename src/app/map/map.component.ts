@@ -10,6 +10,7 @@ import { DataService } from "../data.service";
 export class MapComponent implements OnInit {
 
   displaySearchResults: any = null;
+  loadMap: boolean = false;
   activeCity: boolean = false;
   centerLat: number = 43.332987;
   centerLng: number = 11.939059;
@@ -23,6 +24,8 @@ export class MapComponent implements OnInit {
   ngOnInit() {
     this.data.searchResultMessage.subscribe(searchResult => {
       this.displaySearchResults = searchResult;
+      console.log('SEARCH RESULTS FROM MAP', searchResult)
+      this.renderMap(this.displaySearchResults);
     });
 
     this.data.searchCityCoordsMessage.subscribe(
@@ -31,6 +34,10 @@ export class MapComponent implements OnInit {
         this.changeSelectedCity(this.displaySelectedCityCoords);
         this.activeCity = true;
       });
+  }
+
+  renderMap(results) {
+    results === undefined || results.length == 0 ? this.loadMap = false : this.loadMap = true;
   }
 
   clickedMarker(infoWindow) {

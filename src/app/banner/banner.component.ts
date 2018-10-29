@@ -1,16 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 
-import { environment } from '../../environments/environment';
-
 @Component({
   selector: 'app-banner',
   templateUrl: './banner.component.html',
   styleUrls: ['./banner.component.css']
 })
 export class BannerComponent implements OnInit {
-  env = environment;
-
-  getStartedClicked = true;
+  childComponentHidden: boolean = true;
 
   constructor() { }
 
@@ -19,7 +15,7 @@ export class BannerComponent implements OnInit {
   }
 
   getStarted () {
-    this.getStartedClicked = false;
+    this.childComponentHidden = false;
   }
  
  

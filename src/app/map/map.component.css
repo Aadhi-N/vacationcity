@@ -2,6 +2,12 @@ agm-map {
   height: 800px;
 }
 
+#no-results-message {
+	text-align: center;
+	margin: 11em 1em 11em 1em;
+	font-style: italic;
+}
+
 .info-window {
 	padding-bottom: 10px;
 }

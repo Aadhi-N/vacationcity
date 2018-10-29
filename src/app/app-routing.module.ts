@@ -4,8 +4,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { BannerComponent } from "./banner/banner.component";
 
 const routes: Routes = [
-  { path: '', redirectTo: '/banner', pathMatch: 'full' },
-  { path: 'banner', component: BannerComponent },  
+  { path: '', redirectTo: '', pathMatch: 'full' },
+  { path: '', component: BannerComponent },  
 ];
 
 @NgModule({
@@ -13,3 +13,4 @@ const routes: Routes = [
   exports: [ RouterModule ]
 })
 export class AppRoutingModule { }
+ 

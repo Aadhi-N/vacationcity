@@ -42,7 +42,7 @@
         </div>
 
 
-        <div [class.noResultMessage]="isResultsAvailable">No results available</div>
+        <div [class.noResultMessage]="isResultsAvailable"><h1 id="no-results-message">No city results available for the selection you provided.</h1></div>
         <!----------------------------- tile grid  -------------------------->
         <div class="ui four cards">
           <!-- FOUR CARDS START -->
@@ -119,7 +119,7 @@
         <!----------------------------- pagination  -------------------------->
         <div class="row" [class.showPagination]="!isResultsAvailable" id="pagination-row">
           
-          <pagination-controls (pageChange)="p = $event" class="ui pagination menu" id="ngx-pagination"></pagination-controls>
+          <span class="ui pagination menu" id="ngx-pagination"><pagination-controls (pageChange)="p = $event" ></pagination-controls></span>
         </div>
         <!-- PAGINATION END -->
         <!----------------------------- pagination  -------------------------->

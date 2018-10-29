@@ -41,16 +41,22 @@
   font-weight: bold;
 }
 
-.farenheit {
-/*  color: blue;
+#tempBlock {
+  border-bottom: 1px solid #000;
+  padding-bottom: 5px;
+  font-weight: bold;
+}
+
+.fahrenheit {
+  color: blue;
   cursor: pointer;
-  font-weight: bold;*/
+  font-weight: bold;
 }
 
 .celcius {
-/*  color: blue;
+  color: blue;
   cursor: pointer;
-  font-weight: bold;*/
+  font-weight: bold;
 }
 /*
 .showCelcius {

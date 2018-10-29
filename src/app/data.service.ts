@@ -6,7 +6,7 @@ export class DataService {
 
 
   private searchResultSource = new BehaviorSubject<any>("");
-  private searchQuerySource = new BehaviorSubject<any>("default query");
+  private searchQuerySource = new BehaviorSubject<any>([""]);
   private searchCityCoordsSource = new BehaviorSubject<any>("");
 
   //current message variable used by components

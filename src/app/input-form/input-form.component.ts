@@ -26,9 +26,9 @@ import { HumidityService } from "../humidity.service";
   styleUrls: ["./input-form.component.css"]
 })
 export class InputFormComponent implements OnInit {
-  @Input() formHidden: string;
+  @Input() formHidden: boolean;
 
-  submitClicked = true;
+  childComponentHidden: boolean = true;
 
   months: Month[];
   cities: City[];
@@ -39,20 +39,20 @@ export class InputFormComponent implements OnInit {
     mid: 0}
   humidity: Humidity[];
 
-  selectedMonth: number;
+  selectedMonth: number = null;
   selectedMonthName: string;
-  selectedTemp: number = 0;
+  selectedTemp: number = null;
   convertedTemp: number = null;
-  selectedHumidity: number = 50;
+  selectedHumidity: number = null;
   submitData: any[];
 
   filteredMonth: any[];
 
   celciusActive: boolean = true;
   fahrenheitActive: boolean = false;
-  isMonthValue = true;
-  isTempValue = true;
-  isHumidityValue = true;
+  isMonthValue: boolean = true;
+  isTempValue: boolean = true;
+  isHumidityValue: boolean = true;
 
   filteredSearchResults: any;
   displaySearchResults: any;
@@ -188,16 +188,18 @@ export class InputFormComponent implements OnInit {
 
   validateForm() {
     /* ternary condition that evaluates if filter options are selected; triggers error message if unselected */
-    void (this.selectedMonth === undefined && (this.isMonthValue = false));
-    void (this.selectedTemp === undefined && (this.isTempValue = false));
-    void (this.selectedHumidity === undefined && (this.isHumidityValue = false));
+    // this.validateMetric()
+    void (this.selectedMonth === null && (this.isMonthValue = false));
+    void (this.selectedTemp === null && (this.isTempValue = false));
+    void (this.selectedHumidity === null && (this.isHumidityValue = false));
 
-    this.validateMetric();
+    /* only when all input field are selected, next function is called */
+    void (this.isMonthValue && this.isTempValue && this.isHumidityValue && (this.validateMetric())
+    
   }
 
   displayResults(results) {
     this.data.changeSearchResultMessage(results);
-    console.log('DISPLAY RESULTS', results)
   }
 
   validateMetric() {
@@ -252,9 +254,10 @@ export class InputFormComponent implements OnInit {
 
     this.displaySearchParams();
     this.displayResults(this.displaySearchResults);
+    this.submitForResults();
   }
 
-  submit() {
-    this.submitClicked = false;
+  submitForResults() {
+    this.childComponentHidden = false;
   }
 }
